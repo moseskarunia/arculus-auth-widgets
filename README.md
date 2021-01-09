@@ -30,7 +30,7 @@ GenericAppleButton(label: 'Sign in with Apple', onPressed: (_) {});
 GenericGoogleButton(label: 'Sign in with Google', onPressed: (_) {});
 ```
 
-<img src="https://raw.githubusercontent.com/moseskarunia/arculus-auth-widgets/master/graphics/generic_normal.png" alt="Generic Rounded" height="256" width="512">
+<img src="https://raw.githubusercontent.com/moseskarunia/arculus-auth-widgets/master/graphics/generic_rounded.png" alt="Generic Rounded" height="256" width="512">
 
 And since they are basically a `ElevatedButton`, they will adapt to your `ElevatedButtonThemeData` in your root `ThemeData`. For example, I can modify the style of the button to be rounded with `elevatedButtonTheme`'s shape like below. (See the rounded google dark button with that nice circular white background? Yep. It's automatically applied if you make your `ElevatedButton` theme rounded 😉)
 
