@@ -1,5 +1,7 @@
 # Arculus Auth Widgets
 
+![arculus-auth-widgets](https://github.com/moseskarunia/arculus-auth-widgets/workflows/arculus-auth-widgets/badge.svg) [![pub package](https://img.shields.io/pub/v/arculus_auth_widgets.svg)](https://pub.dev/packages/arculus_auth_widgets)
+
 Collection of flutter auth-related widgets such as social sign in buttons, splash page, and sign in page, etc. These widgets are designed to work nicely with your app theming as well as respective brand guidelines. Feel free to post an issue if there's anything wrong.
 
 For your convenience, you can see the button brand guidelines here:
@@ -31,7 +33,7 @@ GenericGoogleButton(label: 'Sign in with Google', onPressed: (_) {});
 
 ![Generic Rounded Button](graphics/generic_rounded.png)
 
-And since they are basically a `ElevatedButton`, they will adapt to your `ElevatedButtonThemeData` in your root `ThemeData`. For example, I can modify the style of the button to be rounded with `elevatedButtonTheme`'s shape like below. (See the rounded google dark button with that nice circular white background? 😉)
+And since they are basically a `ElevatedButton`, they will adapt to your `ElevatedButtonThemeData` in your root `ThemeData`. For example, I can modify the style of the button to be rounded with `elevatedButtonTheme`'s shape like below. (See the rounded google dark button with that nice circular white background? Yep. It's automatically applied if you make your `ElevatedButton` theme rounded 😉)
 
 ```dart
 class MyApp extends StatelessWidget {
@@ -145,7 +147,20 @@ Theme(
 ),
 ```
 
+You can use this method to override anything else as well. For example, in case you want to use regular shaped `ElevatedButton` globally, but want to use the rounded version of `ArculusGoogleButton`.
+
 # Coming Soon
+- Write widget testing with codecov.
 - Other social buttons (Request in Issue!)
 - Predefined splash page
 - Predefined onboarding page
+
+# Support
+
+I will appreciate any star to the github repo as well as like to the pub.dev page of this library. If you want, you can also buy me a cup of coffee by clicking the button below to motivate me creating helpful libraries in the future! Thanks for your support!
+
+<a href="https://www.buymeacoffee.com/moseskarunia" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy Me A Coffee" height="50" style="height: 6px !important;width: 22px !important;" ></a>
+
+# Why "Arculus"?
+
+Inspired from the Roman tutelary god of chests and strongboxes, Arculus flutter plugin family will also grow larger in the future to help you implement security features easier to your apps. The one I'm working on currently is a plugin to quickly implement Firebase Auth in flutter apps, so that we don't need to repeatedly rewrite everything from scratch at the beginning of a flutter projects.
