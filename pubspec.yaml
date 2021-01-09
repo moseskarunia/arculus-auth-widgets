@@ -1,6 +1,6 @@
 name: arculus_auth_widgets
 description: Collection of theme-aware flutter auth-related widgets such as social sign in buttons, splash page, and sign in page, etc.
-version: 0.0.2
+version: 0.0.3
 repository: https://www.github.com/moseskarunia/arculus-auth-widgets
 
 environment:

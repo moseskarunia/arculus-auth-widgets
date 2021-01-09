@@ -20,8 +20,7 @@ Flutter's `ThemeData` has a property called `themeMode`. ThemeMode is basically 
 # Features
 
 ## Generic Button
-
-<img src="https://github.com/moseskarunia/arculus-auth-widgets/blob/master/graphics/generic_normal.png" alt="Generic Normal" height="256" width="512">
+<img src="https://raw.githubusercontent.com/moseskarunia/master/graphics/generic_normal.png" alt="Generic Normal" height="256" width="512">
 
 Generic buttons basically just plain `ElevatedButton.icon()`.
 
@@ -31,7 +30,7 @@ GenericAppleButton(label: 'Sign in with Apple', onPressed: (_) {});
 GenericGoogleButton(label: 'Sign in with Google', onPressed: (_) {});
 ```
 
-<img src="https://github.com/moseskarunia/arculus-auth-widgets/blob/master/graphics/generic_normal.png" alt="Generic Rounded" height="256" width="512">
+<img src="https://raw.githubusercontent.com/moseskarunia/master/graphics/generic_normal.png" alt="Generic Rounded" height="256" width="512">
 
 And since they are basically a `ElevatedButton`, they will adapt to your `ElevatedButtonThemeData` in your root `ThemeData`. For example, I can modify the style of the button to be rounded with `elevatedButtonTheme`'s shape like below. (See the rounded google dark button with that nice circular white background? Yep. It's automatically applied if you make your `ElevatedButton` theme rounded 😉)
 
@@ -75,7 +74,7 @@ class MyApp extends StatelessWidget {
 
 ## Arculus Style Button
 
-<img src="https://github.com/moseskarunia/arculus-auth-widgets/blob/master/graphics/arculus_normal.png" alt="Arculus Normal" height="256" width="512">
+<img src="https://raw.githubusercontent.com/moseskarunia/master/graphics/arculus_normal.png" alt="Arculus Normal" height="256" width="512">
 
 Arculus-Style buttons are still `ElevatedButton` at heart, but with more adjustments to make it nicer-looking (for my taste). And yes, they will still adapt to your `ElevatedButtonThemeData` in your root `ThemeData`. (though maybe not as flexible as the generic ones)
 
@@ -85,7 +84,7 @@ ArculusAppleButton(label: 'Sign in with Apple', onPressed: (_) {});
 ArculusGoogleButton(label: 'Sign in with Google', onPressed: (_) {});
 ```
 
-<img src="https://github.com/moseskarunia/arculus-auth-widgets/blob/master/graphics/arculus_rounded.png" alt="Arculus Rounded" height="256" width="512">
+<img src="https://raw.githubusercontent.com/moseskarunia/master/graphics/arculus_rounded.png" alt="Arculus Rounded" height="256" width="512">
 
 They can also be made rounded, similar to how you make the generic ones rounded.
 
