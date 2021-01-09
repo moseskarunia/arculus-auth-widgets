@@ -1,3 +1,4 @@
-## [0.0.1] - TODO: Add release date.
+## [0.0.1] - Initial Release
 
-* TODO: Describe initial release.
+- Generic email, google, and apple sign in buttons.
+- Arculus style email, google, and apple sign in buttons.

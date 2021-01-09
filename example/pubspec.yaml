@@ -7,14 +7,12 @@ version: 1.0.0+1
 
 environment:
   sdk: ">=2.8.0 <3.0.0"
-  flutter: 1.22.5
 
 dependencies:
   flutter:
     sdk: flutter
-  # arculus_auth_widgets:
-  #     path: ../
-  flutter_svg: 0.18.0
+  arculus_auth_widgets:
+    path: ../
 
 dev_dependencies:
   flutter_test:
@@ -22,5 +20,3 @@ dev_dependencies:
 
 flutter:
   uses-material-design: true
-  assets:
-    - assets/
