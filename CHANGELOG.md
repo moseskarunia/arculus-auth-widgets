@@ -1,3 +1,6 @@
+## [0.0.4] - Removes flutter_svg dependency
+- Decided to remove flutter_svg dependency and use png instead.
+
 ## [0.0.3] - Readme
 - Update image links so they don't break in pub.dev
 
