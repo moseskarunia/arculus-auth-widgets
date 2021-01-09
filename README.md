@@ -128,7 +128,7 @@ class MyApp extends StatelessWidget {
 
 ## Brand Icon
 
-In case you needed it, you can use the available plain logo. Note that `GoogleIcon()` doesn't come with the default white background regardles your app's brightness. The apple one will still matches the `Brightness` of your active theme
+In case you needed it, you can use the available plain icon. Note that `GoogleIcon()` doesn't come with the default white background regardles your app's brightness, because the white background is a button feature, not an icon feature. The apple one will still matches the `Brightness` of your active theme.
 
 ```dart
 GoogleIcon();
