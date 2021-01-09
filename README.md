@@ -126,13 +126,13 @@ class MyApp extends StatelessWidget {
 }
 ```
 
-## Brand Logo
+## Brand Icon
 
-In case you needed it, you can use the available plain logo. Note that `GoogleLogo()` doesn't come with the default white background regardles your app's brightness. The apple one will still matches the `Brightness` of your active theme
+In case you needed it, you can use the available plain logo. Note that `GoogleIcon()` doesn't come with the default white background regardles your app's brightness. The apple one will still matches the `Brightness` of your active theme
 
 ```dart
-GoogleLogo();
-AppleLogo();
+GoogleIcon();
+AppleIcon();
 ```
 
 # Overriding root themeMode
