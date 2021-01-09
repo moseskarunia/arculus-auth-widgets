@@ -164,3 +164,7 @@ I will appreciate any star to the github repo as well as like to the pub.dev pag
 # Why "Arculus"?
 
 Inspired from the Roman tutelary god of chests and strongboxes, Arculus flutter plugin family will also grow larger in the future to help you implement security features easier to your apps. The one I'm working on currently is a plugin to quickly implement Firebase Auth in flutter apps, so that we don't need to repeatedly rewrite everything from scratch at the beginning of a flutter projects.
+
+# Credit
+
+- [Freepik via flaticon.com](https://www.flaticon.com/authors/freepik) for those beautiful sun and moon icons!
