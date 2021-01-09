@@ -46,7 +46,8 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      themeMode: ThemeMode.light  /// Use ThemeMode.dark to force darkTheme or ThemeMode.system to match device's theme.
+      /// Use ThemeMode.dark to force darkTheme or ThemeMode.system to match device's theme.
+      themeMode: ThemeMode.light
       /// Other codes
       theme: ThemeData(
         brightness: Brightness.light
@@ -99,7 +100,8 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      themeMode: ThemeMode.light /// Use ThemeMode.dark to force darkTheme or ThemeMode.system to match device's theme.
+      /// Use ThemeMode.dark to force darkTheme or ThemeMode.system to match device's theme.
+      themeMode: ThemeMode.light
       /// Other codes
       theme: ThemeData(
         brightness: Brightness.light
