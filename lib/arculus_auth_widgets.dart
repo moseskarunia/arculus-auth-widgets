@@ -7,4 +7,4 @@ export './src/arculus_email_button.dart';
 export './src/arculus_apple_button.dart';
 export './src/arculus_google_button.dart';
 export './src/google_icon.dart';
-export './src/apple_icon.dart';
+// export './src/apple_icon.dart';
