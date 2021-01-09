@@ -56,7 +56,7 @@ class GenericAppleButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return ElevatedButton.icon(
       key: Key('arculus-generic-apple-button'),
-      icon: AppleIcon(),
+      icon: SizedBox(child: AppleIcon(), width: 18, height: 18),
       label: Text(label),
       style: Theme.of(context).elevatedButtonTheme.style?.copyWith(
                 foregroundColor: MaterialStateProperty.resolveWith(

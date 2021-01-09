@@ -1,6 +1,5 @@
 import 'package:arculus_auth_widgets/src/google_icon.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 
 /// Google Sign In Button in generic [ElevatedButton.icon()] style.
 ///
@@ -75,10 +74,7 @@ class GenericGoogleButton extends StatelessWidget {
             color: Colors.white,
           ),
           padding: const EdgeInsets.all(7),
-          child: SvgPicture.asset(
-            'assets/google.svg',
-            package: 'arculus_auth_widgets',
-          ),
+          child: SizedBox(width: 18, height: 18, child: GoogleIcon()),
         ),
         label: Text(label),
         style: Theme.of(context).elevatedButtonTheme.style?.copyWith(

@@ -93,11 +93,7 @@ class ArculusGoogleButton extends StatelessWidget {
                 color: Colors.white,
               ),
               padding: const EdgeInsets.all(14),
-              child: SizedBox(
-                width: 18,
-                height: 18,
-                child: GoogleIcon(),
-              ),
+              child: SizedBox(width: 18, height: 18, child: GoogleIcon()),
             ),
             SizedBox(width: 16),
             Text(label),

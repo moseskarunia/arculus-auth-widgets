@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 
 /// Plain Apple Icon. If your app brightness is light, will use
 /// the white-colored apple icon. Otherwise black.
@@ -27,13 +26,13 @@ class AppleIcon extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Theme.of(context).brightness == Brightness.light
-        ? SvgPicture.asset(
-            'assets/apple_white.svg',
+        ? Image.asset(
+            'assets/apple_white.png',
             key: Key('apple-icon-white'),
             package: 'arculus_auth_widgets',
           )
-        : SvgPicture.asset(
-            'assets/apple_black.svg',
+        : Image.asset(
+            'assets/apple_black.png',
             key: Key('apple-icon-black'),
             package: 'arculus_auth_widgets',
           );

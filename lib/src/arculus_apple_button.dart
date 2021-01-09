@@ -71,11 +71,7 @@ class ArculusAppleButton extends StatelessWidget {
       ),
       child: Row(
         children: [
-          SizedBox(
-            child: AppleIcon(),
-            width: 18,
-            height: 18,
-          ),
+          SizedBox(child: AppleIcon(), width: 18, height: 18),
           SizedBox(width: 32),
           Text(label),
         ],

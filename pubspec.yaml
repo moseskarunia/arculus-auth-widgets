@@ -10,7 +10,6 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  flutter_svg: ^0.18.0
 
 dev_dependencies:
   flutter_test:
@@ -18,6 +17,6 @@ dev_dependencies:
 
 flutter:
   assets:
-    - assets/apple_black.svg
-    - assets/apple_white.svg
-    - assets/google.svg
+    - assets/apple_black.png
+    - assets/apple_white.png
+    - assets/google.png
