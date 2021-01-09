@@ -1,8 +1,19 @@
 import 'package:arculus_auth_widgets/src/apple_icon.dart';
 import 'package:flutter/material.dart';
 
+/// Apple Sign In Button in Arculus Style which I think is neater.
+/// If you need the more generic version, see [GenericAppleButton].
+///
+/// You can easily theme it using the ordinary theming of a flutter app.
+///
+/// If you need to test this widget, the key is `Key('arculus-apple-button')`.
+///
+/// See readme for more info.
 class ArculusAppleButton extends StatelessWidget {
+  /// Text to display on the button.
   final String label;
+
+  /// If null, the button will be displayed like a "disabled" buttons.
   final void Function(BuildContext) onPressed;
 
   const ArculusAppleButton({
@@ -11,7 +22,7 @@ class ArculusAppleButton extends StatelessWidget {
     this.onPressed,
   }) : super(key: key);
 
-  Color getForegroundColor(
+  Color _getForegroundColor(
     Set<MaterialState> states,
     Brightness brightness,
   ) {
@@ -26,7 +37,7 @@ class ArculusAppleButton extends StatelessWidget {
     return baseColor;
   }
 
-  Color getBackgroundColor(
+  Color _getBackgroundColor(
     Set<MaterialState> states,
     Brightness brightness,
   ) {
@@ -41,7 +52,7 @@ class ArculusAppleButton extends StatelessWidget {
     return baseColor;
   }
 
-  EdgeInsetsGeometry getPadding(Set<MaterialState> states) {
+  EdgeInsetsGeometry _getPadding(Set<MaterialState> states) {
     return EdgeInsets.fromLTRB(16, 16, 16, 16);
   }
 
@@ -51,12 +62,12 @@ class ArculusAppleButton extends StatelessWidget {
       key: Key('arculus-apple-button'),
       style: ButtonStyle(
         foregroundColor: MaterialStateProperty.resolveWith(
-          (s) => getForegroundColor(s, Theme.of(context).brightness),
+          (s) => _getForegroundColor(s, Theme.of(context).brightness),
         ),
         backgroundColor: MaterialStateProperty.resolveWith(
-          (s) => getBackgroundColor(s, Theme.of(context).brightness),
+          (s) => _getBackgroundColor(s, Theme.of(context).brightness),
         ),
-        padding: MaterialStateProperty.resolveWith(getPadding),
+        padding: MaterialStateProperty.resolveWith(_getPadding),
       ),
       child: Row(
         children: [

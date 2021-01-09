@@ -1,8 +1,19 @@
 import 'package:arculus_auth_widgets/src/google_icon.dart';
 import 'package:flutter/material.dart';
 
+/// Google Sign In Button in Arculus Style which I think is neater.
+/// If you need the more generic version, see [GenericGoogleButton].
+///
+/// You can easily theme it using the ordinary theming of a flutter app.
+///
+/// If you need to test this widget, the key is `Key('arculus-google-button')`.
+///
+/// See readme for more info.
 class ArculusGoogleButton extends StatelessWidget {
+  /// Text of the button
   final String label;
+
+  /// If null, the button will be displayed like a "disabled" buttons.
   final void Function(BuildContext) onPressed;
 
   const ArculusGoogleButton({
@@ -11,7 +22,7 @@ class ArculusGoogleButton extends StatelessWidget {
     this.onPressed,
   }) : super(key: key);
 
-  Color getForegroundColor(
+  Color _getForegroundColor(
     Set<MaterialState> states,
     Brightness brightness,
   ) {
@@ -26,7 +37,7 @@ class ArculusGoogleButton extends StatelessWidget {
     return baseColor;
   }
 
-  Color getBackgroundColor(
+  Color _getBackgroundColor(
     Set<MaterialState> states,
     Brightness brightness,
   ) {
@@ -41,14 +52,14 @@ class ArculusGoogleButton extends StatelessWidget {
     return baseColor;
   }
 
-  EdgeInsetsGeometry getDarkPadding(
+  EdgeInsetsGeometry _getDarkPadding(
     Set<MaterialState> states, [
     bool useArculusStyle = false,
   ]) {
     return EdgeInsets.fromLTRB(2, 2, 16, 2);
   }
 
-  EdgeInsetsGeometry getPadding(Set<MaterialState> states) {
+  EdgeInsetsGeometry _getPadding(Set<MaterialState> states) {
     return EdgeInsets.fromLTRB(16, 16, 16, 16);
   }
 
@@ -67,12 +78,12 @@ class ArculusGoogleButton extends StatelessWidget {
         key: Key('arculus-google-button'),
         style: ButtonStyle(
           foregroundColor: MaterialStateProperty.resolveWith(
-            (s) => getForegroundColor(s, Theme.of(context).brightness),
+            (s) => _getForegroundColor(s, Theme.of(context).brightness),
           ),
           backgroundColor: MaterialStateProperty.resolveWith(
-            (s) => getBackgroundColor(s, Theme.of(context).brightness),
+            (s) => _getBackgroundColor(s, Theme.of(context).brightness),
           ),
-          padding: MaterialStateProperty.resolveWith(getDarkPadding),
+          padding: MaterialStateProperty.resolveWith(_getDarkPadding),
         ),
         child: Row(
           children: [
@@ -99,12 +110,12 @@ class ArculusGoogleButton extends StatelessWidget {
     return ElevatedButton(
       style: ButtonStyle(
         foregroundColor: MaterialStateProperty.resolveWith(
-          (s) => getForegroundColor(s, Theme.of(context).brightness),
+          (s) => _getForegroundColor(s, Theme.of(context).brightness),
         ),
         backgroundColor: MaterialStateProperty.resolveWith(
-          (s) => getBackgroundColor(s, Theme.of(context).brightness),
+          (s) => _getBackgroundColor(s, Theme.of(context).brightness),
         ),
-        padding: MaterialStateProperty.resolveWith(getPadding),
+        padding: MaterialStateProperty.resolveWith(_getPadding),
       ),
       child: Row(
         children: [

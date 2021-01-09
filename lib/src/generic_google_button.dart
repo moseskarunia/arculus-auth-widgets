@@ -2,8 +2,19 @@ import 'package:arculus_auth_widgets/src/google_icon.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
+/// Google Sign In Button in generic [ElevatedButton.icon()] style.
+///
+/// You can easily theme it using the ordinary theming of a flutter app.
+///
+/// If you need to test this widget, the key is
+/// `Key('arculus-generic-google-button')`.
+///
+/// See readme for more info.
 class GenericGoogleButton extends StatelessWidget {
+  /// Text of the button
   final String label;
+
+  /// If null, the button will be displayed like a "disabled" buttons.
   final void Function(BuildContext) onPressed;
 
   const GenericGoogleButton({
@@ -12,7 +23,7 @@ class GenericGoogleButton extends StatelessWidget {
     this.onPressed,
   }) : super(key: key);
 
-  Color getForegroundColor(
+  Color _getForegroundColor(
     Set<MaterialState> states,
     Brightness brightness,
   ) {
@@ -27,7 +38,7 @@ class GenericGoogleButton extends StatelessWidget {
     return baseColor;
   }
 
-  Color getBackgroundColor(
+  Color _getBackgroundColor(
     Set<MaterialState> states,
     Brightness brightness,
   ) {
@@ -42,12 +53,8 @@ class GenericGoogleButton extends StatelessWidget {
     return baseColor;
   }
 
-  EdgeInsetsGeometry getDarkPadding(Set<MaterialState> states) {
+  EdgeInsetsGeometry _getDarkPadding(Set<MaterialState> states) {
     return EdgeInsets.fromLTRB(2, 1, 12, 1);
-  }
-
-  EdgeInsetsGeometry getPadding(Set<MaterialState> states) {
-    return EdgeInsets.fromLTRB(16, 16, 16, 16);
   }
 
   @override
@@ -75,21 +82,21 @@ class GenericGoogleButton extends StatelessWidget {
         ),
         label: Text(label),
         style: Theme.of(context).elevatedButtonTheme.style?.copyWith(
-                  padding: MaterialStateProperty.resolveWith(getDarkPadding),
+                  padding: MaterialStateProperty.resolveWith(_getDarkPadding),
                   foregroundColor: MaterialStateProperty.resolveWith(
-                    (s) => getForegroundColor(s, Theme.of(context).brightness),
+                    (s) => _getForegroundColor(s, Theme.of(context).brightness),
                   ),
                   backgroundColor: MaterialStateProperty.resolveWith(
-                    (s) => getBackgroundColor(s, Theme.of(context).brightness),
+                    (s) => _getBackgroundColor(s, Theme.of(context).brightness),
                   ),
                 ) ??
             ButtonStyle(
-              padding: MaterialStateProperty.resolveWith(getDarkPadding),
+              padding: MaterialStateProperty.resolveWith(_getDarkPadding),
               foregroundColor: MaterialStateProperty.resolveWith(
-                (s) => getForegroundColor(s, Theme.of(context).brightness),
+                (s) => _getForegroundColor(s, Theme.of(context).brightness),
               ),
               backgroundColor: MaterialStateProperty.resolveWith(
-                (s) => getBackgroundColor(s, Theme.of(context).brightness),
+                (s) => _getBackgroundColor(s, Theme.of(context).brightness),
               ),
             ),
         onPressed: onPressed != null ? () => onPressed(context) : null,
@@ -105,18 +112,18 @@ class GenericGoogleButton extends StatelessWidget {
       label: Text(label),
       style: Theme.of(context).elevatedButtonTheme.style?.copyWith(
                 foregroundColor: MaterialStateProperty.resolveWith(
-                  (s) => getForegroundColor(s, Theme.of(context).brightness),
+                  (s) => _getForegroundColor(s, Theme.of(context).brightness),
                 ),
                 backgroundColor: MaterialStateProperty.resolveWith(
-                  (s) => getBackgroundColor(s, Theme.of(context).brightness),
+                  (s) => _getBackgroundColor(s, Theme.of(context).brightness),
                 ),
               ) ??
           ButtonStyle(
             foregroundColor: MaterialStateProperty.resolveWith(
-              (s) => getForegroundColor(s, Theme.of(context).brightness),
+              (s) => _getForegroundColor(s, Theme.of(context).brightness),
             ),
             backgroundColor: MaterialStateProperty.resolveWith(
-              (s) => getBackgroundColor(s, Theme.of(context).brightness),
+              (s) => _getBackgroundColor(s, Theme.of(context).brightness),
             ),
           ),
       onPressed: onPressed != null ? () => onPressed(context) : null,

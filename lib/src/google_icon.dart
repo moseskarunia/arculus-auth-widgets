@@ -1,6 +1,36 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
+/// Plain Apple Icon. If your app brightness is light, will use
+/// the white-colored apple icon. Otherwise black.
+///
+/// If you want ot size it, wrap it in a SizedBox
+///
+/// ```dart
+/// SizedBox(
+///   width: 18,
+///   height: 18,
+///   child: GoogleIcon(),
+/// )
+/// ```
+///
+/// Unlike `AppleIcon`, `GoogleIcon` stays the same regardless of theme
+/// brightness. If you want to add white color to the background, do:
+///
+/// ```dart
+///Container(
+///  decoration: BoxDecoration(
+///    borderRadius: BorderRadius.circular(4),
+///    color: Colors.white,
+///  ),
+///  padding: const EdgeInsets.all(8),
+///  child: SizedBox(
+///    width: 18,
+///    height: 18,
+///    child: GoogleIcon(),
+///  ),
+///);
+/// ```
 class GoogleIcon extends StatelessWidget {
   @override
   Widget build(BuildContext context) {

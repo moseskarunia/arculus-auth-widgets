@@ -1,8 +1,19 @@
 import 'package:arculus_auth_widgets/src/apple_icon.dart';
 import 'package:flutter/material.dart';
 
+/// Apple Sign In Button in generic [ElevatedButton.icon()] Style.
+///
+/// You can easily theme it using the ordinary theming of a flutter app.
+///
+/// If you need to test this widget, the key is
+/// `Key('arculus-generic-apple-button')`.
+///
+/// See readme for more info.
 class GenericAppleButton extends StatelessWidget {
+  /// Text of the button
   final String label;
+
+  /// If null, the button will be displayed like a "disabled" buttons.
   final void Function(BuildContext) onPressed;
 
   const GenericAppleButton({
@@ -11,7 +22,7 @@ class GenericAppleButton extends StatelessWidget {
     this.onPressed,
   }) : super(key: key);
 
-  Color getForegroundColor(
+  Color _getForegroundColor(
     Set<MaterialState> states,
     Brightness brightness,
   ) {
@@ -26,7 +37,7 @@ class GenericAppleButton extends StatelessWidget {
     return baseColor;
   }
 
-  Color getBackgroundColor(
+  Color _getBackgroundColor(
     Set<MaterialState> states,
     Brightness brightness,
   ) {
@@ -41,10 +52,6 @@ class GenericAppleButton extends StatelessWidget {
     return baseColor;
   }
 
-  EdgeInsetsGeometry getPadding(Set<MaterialState> states) {
-    return EdgeInsets.fromLTRB(16, 16, 16, 16);
-  }
-
   @override
   Widget build(BuildContext context) {
     return ElevatedButton.icon(
@@ -53,18 +60,18 @@ class GenericAppleButton extends StatelessWidget {
       label: Text(label),
       style: Theme.of(context).elevatedButtonTheme.style?.copyWith(
                 foregroundColor: MaterialStateProperty.resolveWith(
-                  (s) => getForegroundColor(s, Theme.of(context).brightness),
+                  (s) => _getForegroundColor(s, Theme.of(context).brightness),
                 ),
                 backgroundColor: MaterialStateProperty.resolveWith(
-                  (s) => getBackgroundColor(s, Theme.of(context).brightness),
+                  (s) => _getBackgroundColor(s, Theme.of(context).brightness),
                 ),
               ) ??
           ButtonStyle(
             foregroundColor: MaterialStateProperty.resolveWith(
-              (s) => getForegroundColor(s, Theme.of(context).brightness),
+              (s) => _getForegroundColor(s, Theme.of(context).brightness),
             ),
             backgroundColor: MaterialStateProperty.resolveWith(
-              (s) => getBackgroundColor(s, Theme.of(context).brightness),
+              (s) => _getBackgroundColor(s, Theme.of(context).brightness),
             ),
           ),
       onPressed: onPressed != null ? () => onPressed(context) : null,
