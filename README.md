@@ -1,5 +1,7 @@
 # Arculus Auth Widgets
 
+⚠️ This package is still under development and not yet tested. That's why it's not 1.0.0 yet. With that being said, I don't expect any major changes to the existing widgets.
+
 ![arculus-auth-widgets](https://github.com/moseskarunia/arculus-auth-widgets/workflows/arculus-auth-widgets/badge.svg) [![pub package](https://img.shields.io/pub/v/arculus_auth_widgets.svg)](https://pub.dev/packages/arculus_auth_widgets)
 
 Collection of flutter auth-related widgets such as social sign in buttons, splash page, and sign in page, etc. These widgets are designed to work nicely with your app theming as well as respective brand guidelines. Feel free to post an issue if there's anything wrong.

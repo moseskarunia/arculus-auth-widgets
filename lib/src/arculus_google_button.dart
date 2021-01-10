@@ -66,13 +66,21 @@ class ArculusGoogleButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     if (Theme.of(context).brightness == Brightness.dark) {
-      BorderRadius _parentRadius = (Theme.of(context)
-                  .elevatedButtonTheme
-                  ?.style
-                  ?.shape
-                  ?.resolve(<MaterialState>{}) as RoundedRectangleBorder)
-              ?.borderRadius ??
-          BorderRadius.circular(4);
+      OutlinedBorder _parentBorder = Theme.of(context)
+          .elevatedButtonTheme
+          ?.style
+          ?.shape
+          ?.resolve(<MaterialState>{});
+
+      if (_parentBorder == null) {
+        _parentBorder = Theme.of(context).buttonTheme?.shape;
+      }
+
+      BorderRadiusGeometry _borderRadius = BorderRadius.zero;
+
+      if (_parentBorder is RoundedRectangleBorder) {
+        _borderRadius = _parentBorder.borderRadius;
+      }
 
       return ElevatedButton(
         key: Key('arculus-google-button'),
@@ -89,7 +97,7 @@ class ArculusGoogleButton extends StatelessWidget {
           children: [
             Container(
               decoration: BoxDecoration(
-                borderRadius: _parentRadius,
+                borderRadius: _borderRadius,
                 color: Colors.white,
               ),
               padding: const EdgeInsets.all(14),
