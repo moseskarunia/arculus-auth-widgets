@@ -14,7 +14,7 @@ As for the email sign in button, I just use the default theming of `ElevatedButt
 
 # Features Overview
 
-✨ Easily show LoadingIndicator by setting provided `isLoading`. When `isLoading:true` buttons will automatically disabled, preventing repeated taps.
+✨ Easily show LoadingIndicator using the provided `isLoading` property. When `isLoading:true` buttons will automatically disabled, preventing repeated taps. The button also visible as translucent as a cue to the user that it's not interactable at the moment.
 
 ✨ Automatically adapts to your root Theme, such as Theme brightness and `ElevatedButton` shape.
 
