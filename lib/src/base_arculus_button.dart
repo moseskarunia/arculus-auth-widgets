@@ -78,19 +78,25 @@ class BaseArculusButton extends StatelessWidget {
             MaterialStateProperty.resolveWith(
                 (s) => Theme.of(context).buttonTheme.padding),
       ),
-      child: isLoading
-          ? Center(
-              child: SizedBox(
-                width: 18,
-                height: 18,
-                child: CircularProgressIndicator(strokeWidth: 2),
-              ),
-            )
-          : Row(children: [
-              child,
-              SizedBox(width: iconToLabelHorizontalSpacing),
-              Text(label)
-            ]),
+      child: Row(children: [
+        child,
+        isLoading
+            ? Expanded(
+                child: Center(
+                  child: SizedBox(
+                    width: 18,
+                    height: 18,
+                    child: CircularProgressIndicator(strokeWidth: 2),
+                  ),
+                ),
+              )
+            : Padding(
+                padding: EdgeInsets.only(
+                  left: iconToLabelHorizontalSpacing,
+                ),
+                child: Text(label),
+              )
+      ]),
       onPressed:
           onPressed != null && !isLoading ? () => onPressed(context) : null,
     );
