@@ -12,6 +12,12 @@ For your convenience, you can see the button brand guidelines here:
 
 As for the email sign in button, I just use the default theming of `ElevatedButton`, which is usually have background color equals to your app's primary color, and foreground color equals to your app's primaryTextTheme.button (Primary Text Theme = Text Theme with color contrast to your primary color.)
 
+# Features Overview
+
+✨ Easily show LoadingIndicator by setting provided `isLoading`. When `isLoading:true` buttons will automatically disabled, preventing repeated taps.
+
+✨ Automatically adapts to your root Theme, such as Theme brightness and `ElevatedButton` shape.
+
 # About Brightness / Theme Mode
 
 Flutter's `ThemeData` has a property called `themeMode`. ThemeMode is basically tells the flutter app which theme to use. I usually use `ThemeMode.system` to make the app theme matches the user's device system configuration.
@@ -24,7 +30,7 @@ Flutter's `ThemeData` has a property called `themeMode`. ThemeMode is basically 
 ## Generic Button
 <img src="https://raw.githubusercontent.com/moseskarunia/arculus-auth-widgets/master/graphics/generic_normal.png" alt="Generic Normal" height="256" width="512">
 
-Generic buttons basically just plain `ElevatedButton.icon()`.
+Generic buttons basically just customized `ElevatedButton.icon()`.
 
 ```dart
 GenericEmailButton(label: 'Sign in with Email', onPressed: (_) {});
