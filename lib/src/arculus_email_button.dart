@@ -86,14 +86,25 @@ class ArculusEmailButton extends StatelessWidget {
     return Theme(
       data: Theme.of(context).copyWith(
         elevatedButtonTheme: buttonThemeData,
-        accentColor: Theme.of(context).primaryTextTheme.button.color,
+        accentColor: Theme.of(context).primaryTextTheme.button.color.withOpacity(0.5),
       ),
       child: BaseArculusButton(
         key: Key('arculus-email-button'),
         isLoading: isLoading,
-        child: Icon(Icons.email, size: 18),
+        child: Padding(
+          padding: const EdgeInsets.only(right: 16),
+          child: Icon(
+            Icons.email,
+            size: 18,
+            color: Theme.of(context)
+                .primaryTextTheme
+                .button
+                .color
+                .withOpacity(onPressed != null && !isLoading ? 1 : 0.5),
+          ),
+        ),
         label: label,
-        onPressed: onPressed != null ? onPressed : null,
+        onPressed: onPressed,
         getPadding: (s, _) => EdgeInsets.all(16),
       ),
     );

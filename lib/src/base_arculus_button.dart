@@ -24,9 +24,6 @@ class BaseArculusButton extends StatelessWidget {
   /// [getBackgroundColor], [getBackgroundColor], and [getPadding].
   final void Function(BuildContext) onPressed;
 
-  /// Icon to label spacing
-  final double iconToLabelHorizontalSpacing;
-
   /// Displays [CircularProgressIndicator] at the center of the button.
   /// The color of the indicator equals to [Theme.of(context).accentColor].
   ///
@@ -41,7 +38,6 @@ class BaseArculusButton extends StatelessWidget {
     this.getForegroundColor,
     this.getBackgroundColor,
     this.getPadding,
-    this.iconToLabelHorizontalSpacing = 32,
     this.isLoading = false,
   });
 
@@ -90,12 +86,7 @@ class BaseArculusButton extends StatelessWidget {
                   ),
                 ),
               )
-            : Padding(
-                padding: EdgeInsets.only(
-                  left: iconToLabelHorizontalSpacing,
-                ),
-                child: Text(label),
-              )
+            : Padding(padding: EdgeInsets.only(left: 16), child: Text(label))
       ]),
       onPressed:
           onPressed != null && !isLoading ? () => onPressed(context) : null,

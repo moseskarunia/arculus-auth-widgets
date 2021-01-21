@@ -85,11 +85,19 @@ class GenericEmailButton extends StatelessWidget {
     return Theme(
       data: Theme.of(context).copyWith(
         elevatedButtonTheme: buttonThemeData,
-        accentColor: Theme.of(context).primaryTextTheme.button.color,
+        accentColor: Theme.of(context).primaryTextTheme.button.color.withOpacity(0.5),
       ),
       child: BaseGenericButton(
         key: Key('arculus-generic-email-button'),
-        child: Icon(icon, size: 18),
+        child: Icon(
+          icon,
+          size: 18,
+          color: Theme.of(context)
+              .primaryTextTheme
+              .button
+              .color
+              .withOpacity(onPressed != null && !isLoading ? 1 : 0.5),
+        ),
         label: label,
         isLoading: isLoading,
         onPressed: onPressed != null && !isLoading ? onPressed : null,

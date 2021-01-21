@@ -93,18 +93,22 @@ class GenericGoogleButton extends StatelessWidget {
       icon = Container(
         decoration: BoxDecoration(
           borderRadius: _borderRadius,
-          color: Colors.white,
+          color: Colors.white
+              .withOpacity(onPressed != null && !isLoading ? 1 : 0.5),
         ),
         padding: const EdgeInsets.all(7),
-        child: SizedBox(width: 18, height: 18, child: GoogleIcon()),
+        child: SizedBox(
+            width: 18,
+            height: 18,
+            child: GoogleIcon(isEnabled: onPressed != null && !isLoading)),
       );
     }
 
     return Theme(
       data: Theme.of(context).copyWith(
         accentColor: Theme.of(context).brightness == Brightness.light
-            ? Color(0xFF4285F4)
-            : Theme.of(context).primaryTextTheme.button.color,
+            ? Color(0xFF4285F4).withOpacity(0.5)
+            : Theme.of(context).primaryTextTheme.button.color.withOpacity(0.5),
       ),
       child: BaseGenericButton(
         key: Key('arculus-generic-google-button'),

@@ -66,12 +66,15 @@ class GenericAppleButton extends StatelessWidget {
     return Theme(
       data: Theme.of(context).copyWith(
         accentColor: Theme.of(context).brightness == Brightness.light
-            ? Colors.white
-            : Colors.black,
+            ? Colors.white.withOpacity(0.5)
+            : Colors.black.withOpacity(0.5),
       ),
       child: BaseGenericButton(
         key: Key('arculus-generic-apple-button'),
-        child: SizedBox(child: AppleIcon(), width: 18, height: 18),
+        child: SizedBox(
+            child: AppleIcon(isEnabled: onPressed != null && !isLoading),
+            width: 18,
+            height: 18),
         label: label,
         getForegroundColor: _getForegroundColor,
         getBackgroundColor: _getBackgroundColor,

@@ -63,7 +63,7 @@ class ArculusGoogleButton extends StatelessWidget {
 
   EdgeInsetsGeometry _getPadding(
       Set<MaterialState> states, Brightness brightness) {
-    if (brightness == Brightness.dark && !isLoading) {
+    if (brightness == Brightness.dark) {
       return EdgeInsets.fromLTRB(0, 0, 16, 0);
     }
     return EdgeInsets.fromLTRB(16, 16, 16, 16);
@@ -97,11 +97,15 @@ class ArculusGoogleButton extends StatelessWidget {
       icon = Container(
         decoration: BoxDecoration(
           borderRadius: _borderRadius,
-          color: Colors.white,
+          color: Colors.white
+              .withOpacity(onPressed != null && !isLoading ? 1 : 0.5),
         ),
         margin: const EdgeInsets.all(2),
         padding: const EdgeInsets.all(14),
-        child: SizedBox(width: 18, height: 18, child: GoogleIcon()),
+        child: SizedBox(
+            width: 18,
+            height: 18,
+            child: GoogleIcon(isEnabled: onPressed != null && !isLoading)),
       );
     }
 
@@ -109,19 +113,17 @@ class ArculusGoogleButton extends StatelessWidget {
       data: Theme.of(context).copyWith(
         accentColor: Theme.of(context).brightness == Brightness.light
             ? Color(0xFF4285F4)
-            : Theme.of(context).primaryTextTheme.button.color,
+            : Theme.of(context).primaryTextTheme.button.color.withOpacity(0.5),
       ),
       child: BaseArculusButton(
         key: Key('arculus-google-button'),
         isLoading: isLoading,
         child: icon,
         label: label,
-        onPressed: onPressed != null ? onPressed : null,
+        onPressed: onPressed,
         getForegroundColor: _getForegroundColor,
         getBackgroundColor: _getBackgroundColor,
         getPadding: _getPadding,
-        iconToLabelHorizontalSpacing:
-            Theme.of(context).brightness == Brightness.dark ? 16 : 32,
       ),
     );
   }
