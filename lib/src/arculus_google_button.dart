@@ -106,22 +106,23 @@ class ArculusGoogleButton extends StatelessWidget {
     }
 
     return Theme(
-        data: Theme.of(context).copyWith(
-          accentColor: Theme.of(context).brightness == Brightness.light
-              ? Color(0xFF4285F4)
-              : Theme.of(context).primaryTextTheme.button.color,
-        ),
-        child: BaseArculusButton(
-          key: Key('arculus-google-button'),
-          isLoading: isLoading,
-          child: icon,
-          label: label,
-          onPressed: onPressed != null ? onPressed : null,
-          getForegroundColor: _getForegroundColor,
-          getBackgroundColor: _getBackgroundColor,
-          getPadding: _getPadding,
-          iconToLabelHorizontalSpacing:
-              Theme.of(context).brightness == Brightness.dark ? 16 : 32,
-        ));
+      data: Theme.of(context).copyWith(
+        accentColor: Theme.of(context).brightness == Brightness.light
+            ? Color(0xFF4285F4)
+            : Theme.of(context).primaryTextTheme.button.color,
+      ),
+      child: BaseArculusButton(
+        key: Key('arculus-google-button'),
+        isLoading: isLoading,
+        child: icon,
+        label: label,
+        onPressed: onPressed != null ? onPressed : null,
+        getForegroundColor: _getForegroundColor,
+        getBackgroundColor: _getBackgroundColor,
+        getPadding: _getPadding,
+        iconToLabelHorizontalSpacing:
+            Theme.of(context).brightness == Brightness.dark ? 16 : 32,
+      ),
+    );
   }
 }
