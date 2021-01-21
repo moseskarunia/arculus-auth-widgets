@@ -20,6 +20,8 @@ class ArculusAppleButton extends StatelessWidget {
   /// Displays [CircularProgressIndicator] at the center of the button.
   /// The color of the indicator equals to [Colors.white] in light, and
   /// [Colors.black] in dark.
+  /// 
+  /// If true, will automatically disables [onPressed].
   final bool isLoading;
 
   const ArculusAppleButton({

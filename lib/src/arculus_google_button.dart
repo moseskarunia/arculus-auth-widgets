@@ -20,6 +20,8 @@ class ArculusGoogleButton extends StatelessWidget {
   /// Displays [CircularProgressIndicator] at the center of the button.
   /// The color of the indicator equals to [Color(0xFF4285F4)] in light, and
   /// [Theme.of(context).primaryTextTheme.button.color] in dark.
+  ///
+  /// If true, will automatically disables [onPressed].
   final bool isLoading;
 
   const ArculusGoogleButton({

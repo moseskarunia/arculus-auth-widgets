@@ -27,6 +27,10 @@ class BaseArculusButton extends StatelessWidget {
   /// Icon to label spacing
   final double iconToLabelHorizontalSpacing;
 
+  /// Displays [CircularProgressIndicator] at the center of the button.
+  /// The color of the indicator equals to [Theme.of(context).accentColor].
+  ///
+  /// If true, will automatically disables [onPressed].
   final bool isLoading;
 
   const BaseArculusButton({

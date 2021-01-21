@@ -22,6 +22,7 @@ class ArculusEmailButton extends StatelessWidget {
   /// Displays [CircularProgressIndicator] at the center of the button.
   /// The color of the indicator equals to
   /// [Theme.of(context).primaryTextTheme.button.color].
+  /// If true, will automatically disables [onPressed].
   final bool isLoading;
 
   const ArculusEmailButton({
