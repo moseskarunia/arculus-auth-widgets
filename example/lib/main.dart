@@ -76,6 +76,7 @@ class _MyHomePageState extends State<MyHomePage> {
               child: GenericGoogleButton(
                 label: 'Sign in with Google',
                 onPressed: (_) {},
+                isLoading: true,
               ),
             ),
             SizedBox(height: 64),
@@ -87,6 +88,7 @@ class _MyHomePageState extends State<MyHomePage> {
             ArculusAppleButton(
               label: 'Sign in with Apple',
               onPressed: (_) {},
+              isLoading: true,
             ),
             SizedBox(height: 16),
             ArculusGoogleButton(
