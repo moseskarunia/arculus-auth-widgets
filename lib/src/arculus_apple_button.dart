@@ -1,4 +1,5 @@
 import 'package:arculus_auth_widgets/src/apple_icon.dart';
+import 'package:arculus_auth_widgets/src/base_arculus_button.dart';
 import 'package:flutter/material.dart';
 
 /// Apple Sign In Button in Arculus Style which I think is neater.
@@ -13,7 +14,7 @@ class ArculusAppleButton extends StatelessWidget {
   /// Text to display on the button.
   final String label;
 
-  /// If null, the button will be displayed like a "disabled" buttons.
+  /// If null, the button will be displayed like a "disabled" button.
   final void Function(BuildContext) onPressed;
 
   const ArculusAppleButton({
@@ -52,31 +53,23 @@ class ArculusAppleButton extends StatelessWidget {
     return baseColor;
   }
 
-  EdgeInsetsGeometry _getPadding(Set<MaterialState> states) {
+  EdgeInsetsGeometry _getPadding(
+    Set<MaterialState> states,
+    Brightness brightness,
+  ) {
     return EdgeInsets.fromLTRB(16, 16, 16, 16);
   }
 
   @override
   Widget build(BuildContext context) {
-    return ElevatedButton(
+    return BaseArculusButton(
       key: Key('arculus-apple-button'),
-      style: ButtonStyle(
-        foregroundColor: MaterialStateProperty.resolveWith(
-          (s) => _getForegroundColor(s, Theme.of(context).brightness),
-        ),
-        backgroundColor: MaterialStateProperty.resolveWith(
-          (s) => _getBackgroundColor(s, Theme.of(context).brightness),
-        ),
-        padding: MaterialStateProperty.resolveWith(_getPadding),
-      ),
-      child: Row(
-        children: [
-          SizedBox(child: AppleIcon(), width: 18, height: 18),
-          SizedBox(width: 32),
-          Text(label),
-        ],
-      ),
-      onPressed: onPressed != null ? () => onPressed(context) : null,
+      child: SizedBox(child: AppleIcon(), width: 18, height: 18),
+      label: label,
+      onPressed: onPressed != null ? onPressed : null,
+      getForegroundColor: _getForegroundColor,
+      getBackgroundColor: _getBackgroundColor,
+      getPadding: _getPadding,
     );
   }
 }
