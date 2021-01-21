@@ -27,6 +27,8 @@ class BaseArculusButton extends StatelessWidget {
   /// Icon to label spacing
   final double iconToLabelHorizontalSpacing;
 
+  final bool isLoading;
+
   const BaseArculusButton({
     Key key,
     @required this.label,
@@ -36,6 +38,7 @@ class BaseArculusButton extends StatelessWidget {
     this.getBackgroundColor,
     this.getPadding,
     this.iconToLabelHorizontalSpacing = 32,
+    this.isLoading = false,
   });
 
   @override
@@ -71,12 +74,21 @@ class BaseArculusButton extends StatelessWidget {
             MaterialStateProperty.resolveWith(
                 (s) => Theme.of(context).buttonTheme.padding),
       ),
-      child: Row(children: [
-        child,
-        SizedBox(width: iconToLabelHorizontalSpacing),
-        Text(label)
-      ]),
-      onPressed: onPressed != null ? () => onPressed(context) : null,
+      child: isLoading
+          ? Center(
+              child: SizedBox(
+                width: 18,
+                height: 18,
+                child: CircularProgressIndicator(strokeWidth: 2),
+              ),
+            )
+          : Row(children: [
+              child,
+              SizedBox(width: iconToLabelHorizontalSpacing),
+              Text(label)
+            ]),
+      onPressed:
+          onPressed != null && !isLoading ? () => onPressed(context) : null,
     );
   }
 }

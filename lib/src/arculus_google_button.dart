@@ -17,9 +17,15 @@ class ArculusGoogleButton extends StatelessWidget {
   /// If null, the button will be displayed like a "disabled" button.
   final void Function(BuildContext) onPressed;
 
+  /// Displays [CircularProgressIndicator] at the center of the button.
+  /// The color of the indicator equals to [Color(0xFF4285F4)] in light, and
+  /// [Theme.of(context).primaryTextTheme.button.color] in dark.
+  final bool isLoading;
+
   const ArculusGoogleButton({
     Key key,
     @required this.label,
+    this.isLoading = false,
     this.onPressed,
   }) : super(key: key);
 
@@ -55,8 +61,8 @@ class ArculusGoogleButton extends StatelessWidget {
 
   EdgeInsetsGeometry _getPadding(
       Set<MaterialState> states, Brightness brightness) {
-    if (brightness == Brightness.dark) {
-      return EdgeInsets.fromLTRB(2, 2, 16, 2);
+    if (brightness == Brightness.dark && !isLoading) {
+      return EdgeInsets.fromLTRB(0, 0, 16, 0);
     }
     return EdgeInsets.fromLTRB(16, 16, 16, 16);
   }
@@ -91,21 +97,29 @@ class ArculusGoogleButton extends StatelessWidget {
           borderRadius: _borderRadius,
           color: Colors.white,
         ),
+        margin: const EdgeInsets.all(2),
         padding: const EdgeInsets.all(14),
         child: SizedBox(width: 18, height: 18, child: GoogleIcon()),
       );
     }
 
-    return BaseArculusButton(
-      key: Key('arculus-google-button'),
-      child: icon,
-      label: label,
-      onPressed: onPressed != null ? onPressed : null,
-      getForegroundColor: _getForegroundColor,
-      getBackgroundColor: _getBackgroundColor,
-      getPadding: _getPadding,
-      iconToLabelHorizontalSpacing:
-          Theme.of(context).brightness == Brightness.dark ? 18 : 32,
-    );
+    return Theme(
+        data: Theme.of(context).copyWith(
+          accentColor: Theme.of(context).brightness == Brightness.light
+              ? Color(0xFF4285F4)
+              : Theme.of(context).primaryTextTheme.button.color,
+        ),
+        child: BaseArculusButton(
+          key: Key('arculus-google-button'),
+          isLoading: isLoading,
+          child: icon,
+          label: label,
+          onPressed: onPressed != null ? onPressed : null,
+          getForegroundColor: _getForegroundColor,
+          getBackgroundColor: _getBackgroundColor,
+          getPadding: _getPadding,
+          iconToLabelHorizontalSpacing:
+              Theme.of(context).brightness == Brightness.dark ? 16 : 32,
+        ));
   }
 }

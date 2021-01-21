@@ -19,21 +19,82 @@ class ArculusEmailButton extends StatelessWidget {
   /// If null, the button will be displayed like a "disabled" button.
   final void Function(BuildContext) onPressed;
 
+  /// Displays [CircularProgressIndicator] at the center of the button.
+  /// The color of the indicator equals to
+  /// [Theme.of(context).primaryTextTheme.button.color].
+  final bool isLoading;
+
   const ArculusEmailButton({
     Key key,
     @required this.label,
+    this.isLoading = false,
     this.icon = Icons.email,
     this.onPressed,
   }) : super(key: key);
 
+  Color _getBackgroundColor(
+    Color primaryColor,
+    Set<MaterialState> states,
+    Brightness brightness,
+  ) {
+    const Set<MaterialState> interactiveStates = <MaterialState>{
+      MaterialState.disabled
+    };
+    if (states.any(interactiveStates.contains)) {
+      return primaryColor.withOpacity(0.5);
+    }
+    return primaryColor;
+  }
+
   @override
   Widget build(BuildContext context) {
-    return BaseArculusButton(
-      key: Key('arculus-email-button'),
-      child: Icon(Icons.email, size: 18),
-      label: label,
-      onPressed: onPressed != null ? onPressed : null,
-      getPadding: (s, _) => EdgeInsets.all(16),
+    final current =
+        Theme.of(context).elevatedButtonTheme?.style?.backgroundColor;
+
+    ElevatedButtonThemeData buttonThemeData =
+        Theme.of(context).elevatedButtonTheme;
+
+    if (current == null) {
+      if (buttonThemeData == null) {
+        buttonThemeData = ElevatedButtonThemeData(
+          style: ButtonStyle(
+            backgroundColor: MaterialStateProperty.resolveWith(
+              (s) => _getBackgroundColor(
+                Theme.of(context).primaryColor,
+                s,
+                Theme.of(context).brightness,
+              ),
+            ),
+          ),
+        );
+      } else {
+        buttonThemeData = ElevatedButtonThemeData(
+          style: buttonThemeData.style.copyWith(
+            backgroundColor: MaterialStateProperty.resolveWith(
+              (s) => _getBackgroundColor(
+                Theme.of(context).primaryColor,
+                s,
+                Theme.of(context).brightness,
+              ),
+            ),
+          ),
+        );
+      }
+    }
+
+    return Theme(
+      data: Theme.of(context).copyWith(
+        elevatedButtonTheme: buttonThemeData,
+        accentColor: Theme.of(context).primaryTextTheme.button.color,
+      ),
+      child: BaseArculusButton(
+        key: Key('arculus-email-button'),
+        isLoading: isLoading,
+        child: Icon(Icons.email, size: 18),
+        label: label,
+        onPressed: onPressed != null ? onPressed : null,
+        getPadding: (s, _) => EdgeInsets.all(16),
+      ),
     );
   }
 }

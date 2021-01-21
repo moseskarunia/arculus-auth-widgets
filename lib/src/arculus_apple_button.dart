@@ -17,9 +17,15 @@ class ArculusAppleButton extends StatelessWidget {
   /// If null, the button will be displayed like a "disabled" button.
   final void Function(BuildContext) onPressed;
 
+  /// Displays [CircularProgressIndicator] at the center of the button.
+  /// The color of the indicator equals to [Colors.white] in light, and
+  /// [Colors.black] in dark.
+  final bool isLoading;
+
   const ArculusAppleButton({
     Key key,
     @required this.label,
+    this.isLoading = false,
     this.onPressed,
   }) : super(key: key);
 
@@ -62,14 +68,22 @@ class ArculusAppleButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BaseArculusButton(
-      key: Key('arculus-apple-button'),
-      child: SizedBox(child: AppleIcon(), width: 18, height: 18),
-      label: label,
-      onPressed: onPressed != null ? onPressed : null,
-      getForegroundColor: _getForegroundColor,
-      getBackgroundColor: _getBackgroundColor,
-      getPadding: _getPadding,
+    return Theme(
+      data: Theme.of(context).copyWith(
+        accentColor: Theme.of(context).brightness == Brightness.light
+            ? Colors.white
+            : Colors.black,
+      ),
+      child: BaseArculusButton(
+        key: Key('arculus-apple-button'),
+        isLoading: isLoading,
+        child: SizedBox(child: AppleIcon(), width: 18, height: 18),
+        label: label,
+        onPressed: onPressed != null ? onPressed : null,
+        getForegroundColor: _getForegroundColor,
+        getBackgroundColor: _getBackgroundColor,
+        getPadding: _getPadding,
+      ),
     );
   }
 }
