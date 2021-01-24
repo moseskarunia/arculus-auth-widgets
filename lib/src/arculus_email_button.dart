@@ -86,7 +86,8 @@ class ArculusEmailButton extends StatelessWidget {
     return Theme(
       data: Theme.of(context).copyWith(
         elevatedButtonTheme: buttonThemeData,
-        accentColor: Theme.of(context).primaryTextTheme.button.color.withOpacity(0.5),
+        accentColor:
+            Theme.of(context).primaryTextTheme.button.color.withOpacity(0.5),
       ),
       child: BaseArculusButton(
         key: Key('arculus-email-button'),
