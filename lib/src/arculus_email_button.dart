@@ -1,3 +1,4 @@
+import 'package:arculus_auth_widgets/src/base_arculus_button.dart';
 import 'package:flutter/material.dart';
 
 /// Email Sign In Button in Arculus Style which I think is neater.
@@ -9,41 +10,104 @@ import 'package:flutter/material.dart';
 ///
 /// See readme for more info.
 class ArculusEmailButton extends StatelessWidget {
-  /// Text to show on the label.
+  /// Text to display on the button.
   final String label;
 
   /// Email icon. Defaults to [Icons.email]
   final IconData icon;
 
-  /// If null, the button will be displayed like a "disabled" buttons.
+  /// If null, the button will be displayed like a "disabled" button.
   final void Function(BuildContext) onPressed;
+
+  /// Displays [CircularProgressIndicator] at the center of the button.
+  /// The color of the indicator equals to
+  /// [Theme.of(context).primaryTextTheme.button.color].
+  /// If true, will automatically disables [onPressed].
+  final bool isLoading;
 
   const ArculusEmailButton({
     Key key,
     @required this.label,
+    this.isLoading = false,
     this.icon = Icons.email,
     this.onPressed,
   }) : super(key: key);
 
-  EdgeInsetsGeometry _getPadding(Set<MaterialState> states) {
-    return EdgeInsets.fromLTRB(16, 16, 16, 16);
+  Color _getBackgroundColor(
+    Color primaryColor,
+    Set<MaterialState> states,
+    Brightness brightness,
+  ) {
+    const Set<MaterialState> interactiveStates = <MaterialState>{
+      MaterialState.disabled
+    };
+    if (states.any(interactiveStates.contains)) {
+      return primaryColor.withOpacity(0.5);
+    }
+    return primaryColor;
   }
 
   @override
   Widget build(BuildContext context) {
-    return ElevatedButton(
-      key: Key('arculus-email-button'),
-      style: ButtonStyle(
-        padding: MaterialStateProperty.resolveWith(_getPadding),
+    final current =
+        Theme.of(context).elevatedButtonTheme?.style?.backgroundColor;
+
+    ElevatedButtonThemeData buttonThemeData =
+        Theme.of(context).elevatedButtonTheme;
+
+    if (current == null) {
+      if (buttonThemeData == null) {
+        buttonThemeData = ElevatedButtonThemeData(
+          style: ButtonStyle(
+            backgroundColor: MaterialStateProperty.resolveWith(
+              (s) => _getBackgroundColor(
+                Theme.of(context).primaryColor,
+                s,
+                Theme.of(context).brightness,
+              ),
+            ),
+          ),
+        );
+      } else {
+        buttonThemeData = ElevatedButtonThemeData(
+          style: buttonThemeData.style.copyWith(
+            backgroundColor: MaterialStateProperty.resolveWith(
+              (s) => _getBackgroundColor(
+                Theme.of(context).primaryColor,
+                s,
+                Theme.of(context).brightness,
+              ),
+            ),
+          ),
+        );
+      }
+    }
+
+    return Theme(
+      data: Theme.of(context).copyWith(
+        elevatedButtonTheme: buttonThemeData,
+        accentColor:
+            Theme.of(context).primaryTextTheme.button.color.withOpacity(0.5),
       ),
-      child: Row(
-        children: [
-          Icon(Icons.email, size: 18),
-          SizedBox(width: 32),
-          Text(label),
-        ],
+      child: BaseArculusButton(
+        key: Key('arculus-email-button'),
+        isLoading: isLoading,
+        child: Padding(
+          padding: const EdgeInsets.only(right: 16),
+          child: Icon(
+            Icons.email,
+            size: 18,
+            color: Theme.of(context)
+                .primaryTextTheme
+                .button
+                .color
+                .withOpacity(onPressed != null && !isLoading ? 1 : 0.5),
+          ),
+        ),
+        label: label,
+        onPressed: onPressed,
+        getPadding: (s, _) => EdgeInsets.all(16),
       ),
-      onPressed: onPressed != null ? () => onPressed(context) : null,
     );
   }
 }

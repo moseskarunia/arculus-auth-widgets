@@ -1,4 +1,5 @@
 import 'package:arculus_auth_widgets/src/apple_icon.dart';
+import 'package:arculus_auth_widgets/src/base_generic_button.dart';
 import 'package:flutter/material.dart';
 
 /// Apple Sign In Button in generic [ElevatedButton.icon()] Style.
@@ -16,10 +17,18 @@ class GenericAppleButton extends StatelessWidget {
   /// If null, the button will be displayed like a "disabled" buttons.
   final void Function(BuildContext) onPressed;
 
+  /// Displays [CircularProgressIndicator] at the center of the button.
+  /// The color of the indicator equals to [Colors.white] in light, and
+  /// [Colors.black] in dark.
+  ///
+  /// If true, will automatically disables [onPressed].
+  final bool isLoading;
+
   const GenericAppleButton({
     Key key,
     @required this.label,
     this.onPressed,
+    this.isLoading = false,
   }) : super(key: key);
 
   Color _getForegroundColor(
@@ -54,27 +63,24 @@ class GenericAppleButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ElevatedButton.icon(
-      key: Key('arculus-generic-apple-button'),
-      icon: SizedBox(child: AppleIcon(), width: 18, height: 18),
-      label: Text(label),
-      style: Theme.of(context).elevatedButtonTheme.style?.copyWith(
-                foregroundColor: MaterialStateProperty.resolveWith(
-                  (s) => _getForegroundColor(s, Theme.of(context).brightness),
-                ),
-                backgroundColor: MaterialStateProperty.resolveWith(
-                  (s) => _getBackgroundColor(s, Theme.of(context).brightness),
-                ),
-              ) ??
-          ButtonStyle(
-            foregroundColor: MaterialStateProperty.resolveWith(
-              (s) => _getForegroundColor(s, Theme.of(context).brightness),
-            ),
-            backgroundColor: MaterialStateProperty.resolveWith(
-              (s) => _getBackgroundColor(s, Theme.of(context).brightness),
-            ),
-          ),
-      onPressed: onPressed != null ? () => onPressed(context) : null,
+    return Theme(
+      data: Theme.of(context).copyWith(
+        accentColor: Theme.of(context).brightness == Brightness.light
+            ? Colors.white.withOpacity(0.5)
+            : Colors.black.withOpacity(0.5),
+      ),
+      child: BaseGenericButton(
+        key: Key('arculus-generic-apple-button'),
+        child: SizedBox(
+            child: AppleIcon(isEnabled: onPressed != null && !isLoading),
+            width: 18,
+            height: 18),
+        label: label,
+        getForegroundColor: _getForegroundColor,
+        getBackgroundColor: _getBackgroundColor,
+        isLoading: isLoading,
+        onPressed: onPressed != null && !isLoading ? onPressed : null,
+      ),
     );
   }
 }

@@ -1,3 +1,11 @@
+## [0.1.0] - 21 January 2021
+- New: `isLoading` property to easily implement loading indicator to your button. When isLoading set to true, the button automatically uninteractive, making it easier to prevent accidental repeated taps. When in disabled mode, The button becomes translucent automatically.
+- New: `BaseArculusButton` and `BaseGenericButton` makes you able to customize the buttons even more.
+- New: `isEnabled` property to `GoogleLogo` and `AppleLogo`. When set to false, will apply 0.5 opacity to the icon.
+- Improvement: Each Email, Google, and Apple button (both generic and arculus) based from `BaseArculusButton` for consistency.
+- **Breaking:** Bumps minumum dart sdk to 2.8.0
+- **Breaking:** Bumps minumum flutter sdk to 1.22.0
+
 ## [0.0.5] - 10 January 2021
 - Google button will also check if `ElevatedButtonTheme` is using non-Rounded Rectangle Border and even resorts back to match `ButtonTheme` if no `ElevatedButtonTheme` set in theme. (Basically makes the widget more robust)
 

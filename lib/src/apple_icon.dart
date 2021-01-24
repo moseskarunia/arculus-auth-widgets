@@ -23,18 +23,25 @@ import 'package:flutter/material.dart';
 /// ),
 /// ```
 class AppleIcon extends StatelessWidget {
+  final bool isEnabled;
+
+  const AppleIcon({Key key, this.isEnabled = true}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
-    return Theme.of(context).brightness == Brightness.light
-        ? Image.asset(
-            'assets/apple_white.png',
-            key: Key('apple-icon-white'),
-            package: 'arculus_auth_widgets',
-          )
-        : Image.asset(
-            'assets/apple_black.png',
-            key: Key('apple-icon-black'),
-            package: 'arculus_auth_widgets',
-          );
+    return Opacity(
+      opacity: isEnabled ? 1 : 0.5,
+      child: Theme.of(context).brightness == Brightness.light
+          ? Image.asset(
+              'assets/apple_white.png',
+              key: Key('apple-icon-white'),
+              package: 'arculus_auth_widgets',
+            )
+          : Image.asset(
+              'assets/apple_black.png',
+              key: Key('apple-icon-black'),
+              package: 'arculus_auth_widgets',
+            ),
+    );
   }
 }

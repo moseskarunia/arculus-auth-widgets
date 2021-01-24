@@ -1,5 +1,7 @@
 library arculus_auth_widgets;
 
+export './src/base_arculus_button.dart';
+export './src/base_generic_button.dart';
 export './src/generic_email_button.dart';
 export './src/generic_apple_button.dart';
 export './src/generic_google_button.dart';

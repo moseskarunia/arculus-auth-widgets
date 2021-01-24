@@ -1,3 +1,4 @@
+import 'package:arculus_auth_widgets/src/base_generic_button.dart';
 import 'package:arculus_auth_widgets/src/google_icon.dart';
 import 'package:flutter/material.dart';
 
@@ -16,9 +17,17 @@ class GenericGoogleButton extends StatelessWidget {
   /// If null, the button will be displayed like a "disabled" buttons.
   final void Function(BuildContext) onPressed;
 
+  /// Displays [CircularProgressIndicator] at the center of the button.
+  /// The color of the indicator equals to [Color(0xFF4285F4)] in light, and
+  /// [Theme.of(context).primaryTextTheme.button.color] in dark.
+  ///
+  /// If true, will automatically disables [onPressed].
+  final bool isLoading;
+
   const GenericGoogleButton({
     Key key,
     @required this.label,
+    this.isLoading = false,
     this.onPressed,
   }) : super(key: key);
 
@@ -52,12 +61,18 @@ class GenericGoogleButton extends StatelessWidget {
     return baseColor;
   }
 
-  EdgeInsetsGeometry _getDarkPadding(Set<MaterialState> states) {
+  EdgeInsetsGeometry _getPadding(
+      Set<MaterialState> states, Brightness brightness) {
+    if (brightness == Brightness.light) {
+      return null;
+    }
     return EdgeInsets.fromLTRB(2, 1, 12, 1);
   }
 
   @override
   Widget build(BuildContext context) {
+    Widget icon = SizedBox(width: 18, height: 18, child: GoogleIcon());
+
     if (Theme.of(context).brightness == Brightness.dark) {
       OutlinedBorder _parentBorder = Theme.of(context)
           .elevatedButtonTheme
@@ -75,63 +90,36 @@ class GenericGoogleButton extends StatelessWidget {
         _borderRadius = _parentBorder.borderRadius;
       }
 
-      return ElevatedButton.icon(
-        key: Key('arculus-generic-google-button'),
-        icon: Container(
-          decoration: BoxDecoration(
-            borderRadius: _borderRadius,
-            color: Colors.white,
-          ),
-          padding: const EdgeInsets.all(7),
-          child: SizedBox(width: 18, height: 18, child: GoogleIcon()),
+      icon = Container(
+        decoration: BoxDecoration(
+          borderRadius: _borderRadius,
+          color: Colors.white
+              .withOpacity(onPressed != null && !isLoading ? 1 : 0.5),
         ),
-        label: Text(label),
-        style: Theme.of(context).elevatedButtonTheme.style?.copyWith(
-                  padding: MaterialStateProperty.resolveWith(_getDarkPadding),
-                  foregroundColor: MaterialStateProperty.resolveWith(
-                    (s) => _getForegroundColor(s, Theme.of(context).brightness),
-                  ),
-                  backgroundColor: MaterialStateProperty.resolveWith(
-                    (s) => _getBackgroundColor(s, Theme.of(context).brightness),
-                  ),
-                ) ??
-            ButtonStyle(
-              padding: MaterialStateProperty.resolveWith(_getDarkPadding),
-              foregroundColor: MaterialStateProperty.resolveWith(
-                (s) => _getForegroundColor(s, Theme.of(context).brightness),
-              ),
-              backgroundColor: MaterialStateProperty.resolveWith(
-                (s) => _getBackgroundColor(s, Theme.of(context).brightness),
-              ),
-            ),
-        onPressed: onPressed != null ? () => onPressed(context) : null,
+        padding: const EdgeInsets.all(7),
+        child: SizedBox(
+            width: 18,
+            height: 18,
+            child: GoogleIcon(isEnabled: onPressed != null && !isLoading)),
       );
     }
 
-    return ElevatedButton.icon(
-      icon: SizedBox(
-        width: 18,
-        height: 18,
-        child: GoogleIcon(),
+    return Theme(
+      data: Theme.of(context).copyWith(
+        accentColor: Theme.of(context).brightness == Brightness.light
+            ? Color(0xFF4285F4).withOpacity(0.5)
+            : Theme.of(context).primaryTextTheme.button.color.withOpacity(0.5),
       ),
-      label: Text(label),
-      style: Theme.of(context).elevatedButtonTheme.style?.copyWith(
-                foregroundColor: MaterialStateProperty.resolveWith(
-                  (s) => _getForegroundColor(s, Theme.of(context).brightness),
-                ),
-                backgroundColor: MaterialStateProperty.resolveWith(
-                  (s) => _getBackgroundColor(s, Theme.of(context).brightness),
-                ),
-              ) ??
-          ButtonStyle(
-            foregroundColor: MaterialStateProperty.resolveWith(
-              (s) => _getForegroundColor(s, Theme.of(context).brightness),
-            ),
-            backgroundColor: MaterialStateProperty.resolveWith(
-              (s) => _getBackgroundColor(s, Theme.of(context).brightness),
-            ),
-          ),
-      onPressed: onPressed != null ? () => onPressed(context) : null,
+      child: BaseGenericButton(
+        key: Key('arculus-generic-google-button'),
+        child: icon,
+        label: label,
+        isLoading: isLoading,
+        getForegroundColor: _getForegroundColor,
+        getBackgroundColor: _getBackgroundColor,
+        getPadding: _getPadding,
+        onPressed: onPressed != null && !isLoading ? onPressed : null,
+      ),
     );
   }
 }

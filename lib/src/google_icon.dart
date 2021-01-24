@@ -31,12 +31,19 @@ import 'package:flutter/material.dart';
 ///);
 /// ```
 class GoogleIcon extends StatelessWidget {
+  final bool isEnabled;
+
+  const GoogleIcon({Key key, this.isEnabled = true}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
-    return Image.asset(
-      'assets/google.png',
-      key: Key('google-icon'),
-      package: 'arculus_auth_widgets',
+    return Opacity(
+      opacity: isEnabled ? 1 : 0.5,
+      child: Image.asset(
+        'assets/google.png',
+        key: Key('google-icon'),
+        package: 'arculus_auth_widgets',
+      ),
     );
   }
 }
