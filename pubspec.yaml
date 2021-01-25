@@ -17,6 +17,7 @@ dev_dependencies:
 
 flutter:
   assets:
+    - assets/
     - assets/apple_black.png
     - assets/apple_white.png
     - assets/google.png
