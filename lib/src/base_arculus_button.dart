@@ -18,7 +18,7 @@ class BaseArculusButton extends StatelessWidget {
   final String label;
 
   /// Recommended size is an icon with size 18
-  final Widget child;
+  final Widget icon;
 
   /// If null, the button will look "disabled". The visual also depends on
   /// [getBackgroundColor], [getBackgroundColor], and [getPadding].
@@ -33,18 +33,18 @@ class BaseArculusButton extends StatelessWidget {
   const BaseArculusButton({
     Key key,
     @required this.label,
-    @required this.child,
+    @required this.icon,
     this.onPressed,
     this.getForegroundColor,
     this.getBackgroundColor,
     this.getPadding,
     this.isLoading = false,
-  });
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return ElevatedButton(
-      key: key,
+      key: Key('arculus-base-button'),
       style: ButtonStyle(
         foregroundColor: (getForegroundColor != null
                 ? MaterialStateProperty.resolveWith(
@@ -52,8 +52,8 @@ class BaseArculusButton extends StatelessWidget {
                   )
                 : Theme.of(context)
                     .elevatedButtonTheme
-                    .style
-                    .foregroundColor) ??
+                    ?.style
+                    ?.foregroundColor) ??
             MaterialStateProperty.resolveWith(
                 (s) => Theme.of(context).primaryTextTheme.button.color),
         backgroundColor: (getBackgroundColor != null
@@ -74,20 +74,36 @@ class BaseArculusButton extends StatelessWidget {
             MaterialStateProperty.resolveWith(
                 (s) => Theme.of(context).buttonTheme.padding),
       ),
-      child: Row(children: [
-        child,
-        isLoading
-            ? Expanded(
-                child: Center(
-                  child: SizedBox(
-                    width: 18,
-                    height: 18,
-                    child: CircularProgressIndicator(strokeWidth: 2),
+      child: Row(
+        key: Key('arculus-base-button-main-child'),
+        children: [
+          icon,
+          isLoading
+              ? Expanded(
+                  key: Key('arculus-base-button-icon-expanded'),
+                  child: Center(
+                    key: Key('arculus-base-button-icon-center'),
+                    child: SizedBox(
+                      key: Key('arculus-base-button-icon-sized-box'),
+                      width: 18,
+                      height: 18,
+                      child: CircularProgressIndicator(
+                        key: Key('arculus-base-button-progress-indicator'),
+                        strokeWidth: 2,
+                      ),
+                    ),
                   ),
-                ),
-              )
-            : Padding(padding: EdgeInsets.only(left: 16), child: Text(label))
-      ]),
+                )
+              : Padding(
+                  key: Key('arculus-base-button-label-padding'),
+                  padding: const EdgeInsets.only(left: 16),
+                  child: Text(
+                    label,
+                    key: Key('arculus-base-button-label'),
+                  ),
+                )
+        ],
+      ),
       onPressed:
           onPressed != null && !isLoading ? () => onPressed(context) : null,
     );
