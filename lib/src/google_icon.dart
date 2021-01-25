@@ -33,7 +33,10 @@ import 'package:flutter/material.dart';
 class GoogleIcon extends StatelessWidget {
   final bool isEnabled;
 
-  const GoogleIcon({Key key, this.isEnabled = true}) : super(key: key);
+  const GoogleIcon({
+    Key key = const Key('google-icon'),
+    this.isEnabled = true,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -41,7 +44,7 @@ class GoogleIcon extends StatelessWidget {
       opacity: isEnabled ? 1 : 0.5,
       child: Image.asset(
         'assets/google.png',
-        key: Key('google-icon'),
+        key: Key('google-icon-image'),
         package: 'arculus_auth_widgets',
       ),
     );
