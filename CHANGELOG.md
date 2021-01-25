@@ -1,3 +1,6 @@
+## [0.1.1] - 25 January 2021
+- Fix: Changed `if (buttonThemeData == null) ` to `if (buttonThemeData?.style == null)` to prevent exception in case of buttonThemeData is not null, but its style is null.
+
 ## [0.1.0] - 21 January 2021
 - New: `isLoading` property to easily implement loading indicator to your button. When isLoading set to true, the button automatically uninteractive, making it easier to prevent accidental repeated taps. When in disabled mode, The button becomes translucent automatically.
 - New: `BaseArculusButton` and `BaseGenericButton` makes you able to customize the buttons even more.

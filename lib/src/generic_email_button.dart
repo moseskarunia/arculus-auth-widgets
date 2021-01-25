@@ -56,7 +56,7 @@ class GenericEmailButton extends StatelessWidget {
         Theme.of(context).elevatedButtonTheme;
 
     if (current == null) {
-      if (buttonThemeData == null) {
+      if (buttonThemeData?.style == null) {
         buttonThemeData = ElevatedButtonThemeData(
           style: ButtonStyle(
             backgroundColor: MaterialStateProperty.resolveWith(
