@@ -8,6 +8,10 @@ class MockGetForegroundColor extends Mock {
   Color call(Set<MaterialState> states, Brightness brightness);
 }
 
+class MockGetBackgroundColor extends Mock {
+  Color call(Set<MaterialState> states, Brightness brightness);
+}
+
 // ignore: must_be_immutable
 class MockButtonStyle extends Mock implements ButtonStyle, Diagnosticable {
   // ignore: missing_return
@@ -288,6 +292,124 @@ void main() {
             .foregroundColor
             .resolve({}),
         Colors.orange,
+      );
+    });
+  });
+
+  group('backgroundColor', () {
+    MockGetBackgroundColor getBackgroundColor;
+    MockButtonStyle buttonStyle;
+
+    setUp(() {
+      getBackgroundColor = MockGetBackgroundColor();
+      when(getBackgroundColor(any, any)).thenReturn(Colors.black);
+      buttonStyle = MockButtonStyle();
+      when(buttonStyle.backgroundColor).thenReturn(materialStateProperty);
+      when(materialStateProperty.resolve(any)).thenReturn(Colors.black);
+    });
+
+    group('should call provided getBackgroundColor', () {
+      BaseArculusButton button;
+      setUp(() {
+        button = BaseArculusButton(
+          label: 'Test Label',
+          icon: SizedBox(key: Key('icon')),
+          getBackgroundColor: getBackgroundColor,
+          onPressed: (_) {},
+        );
+      });
+
+      testWidgets(
+        'with Brightness.light',
+        (tester) async {
+          const Set<MaterialState> interactiveStates = <MaterialState>{};
+
+          await tester.pumpWidget(
+            MaterialApp(
+              themeMode: ThemeMode.light,
+              home: Scaffold(body: button),
+            ),
+          );
+
+          verify(getBackgroundColor(interactiveStates, Brightness.light));
+        },
+      );
+      testWidgets(
+        'with Brightness.dark',
+        (tester) async {
+          const Set<MaterialState> interactiveStates = <MaterialState>{};
+
+          await tester.pumpWidget(
+            MaterialApp(
+              themeMode: ThemeMode.dark,
+              darkTheme: ThemeData(brightness: Brightness.dark),
+              home: Scaffold(body: button),
+            ),
+          );
+
+          verify(getBackgroundColor(interactiveStates, Brightness.dark));
+        },
+      );
+    });
+
+    testWidgets(
+      'should use background of root ElevatedButtonTheme.buttonStyle',
+      (tester) async {
+        await tester.pumpWidget(
+          MaterialApp(
+            themeMode: ThemeMode.light,
+            theme: ThemeData(
+              brightness: Brightness.light,
+              elevatedButtonTheme: ElevatedButtonThemeData(style: buttonStyle),
+            ),
+            home: Scaffold(
+              body: BaseArculusButton(
+                label: 'Test Label',
+                icon: SizedBox(key: Key('icon')),
+                onPressed: (_) {},
+              ),
+            ),
+          ),
+        );
+
+        verifyInOrder([
+          buttonStyle.backgroundColor,
+          materialStateProperty.resolve(any),
+        ]);
+      },
+    );
+
+    testWidgets('should use primary button text color', (tester) async {
+      TextStyle buttonTextStyle = TextStyle(color: Colors.orange);
+
+      await tester.pumpWidget(
+        MaterialApp(
+          themeMode: ThemeMode.light,
+          theme: ThemeData(
+            buttonTheme: ButtonThemeData(
+                colorScheme: ColorScheme.light(primary: Colors.amber)),
+            primaryTextTheme: TextTheme(button: buttonTextStyle),
+            brightness: Brightness.light,
+          ),
+          home: Scaffold(
+            body: BaseArculusButton(
+              label: 'Test Label',
+              icon: SizedBox(key: Key('icon')),
+              onPressed: (_) {},
+            ),
+          ),
+        ),
+      );
+
+      final rootButton = find.byKey(Key('arculus-base-button'));
+
+      expect(
+        tester
+            .widget<ElevatedButton>(rootButton)
+            .style
+            .backgroundColor
+            .resolve({}),
+        Colors.amber,
       );
     });
   });
