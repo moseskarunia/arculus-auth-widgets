@@ -59,41 +59,27 @@ class _MyHomePageState extends State<MyHomePage> {
       body: Container(
         padding: const EdgeInsets.all(16),
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            SizedBox(height: 32),
-            GenericEmailButton(
-              label: 'Sign in with Email',
-              onPressed: (_) {},
-            ),
-            SizedBox(height: 8),
-            GenericAppleButton(
-              label: 'Sign in with Apple',
-              onPressed: (_) {},
-            ),
-            SizedBox(height: 8),
-            Theme(
-              data: Theme.of(context).copyWith(brightness: Brightness.dark),
-              child: GenericGoogleButton(
-                label: 'Sign in with Google',
-                onPressed: (_) {},
-                isLoading: true,
-              ),
-            ),
-            SizedBox(height: 64),
             ArculusEmailButton(
               label: 'Sign in with Email',
               onPressed: (_) {},
+              isLoading: false,
+              isExpanded: true,
             ),
             SizedBox(height: 16),
             ArculusAppleButton(
               label: 'Sign in with Apple',
               onPressed: (_) {},
               isLoading: true,
+              isExpanded: true,
             ),
             SizedBox(height: 16),
             ArculusGoogleButton(
               label: 'Sign in with Google',
               onPressed: (_) {},
+              isLoading: true,
+              isExpanded: false,
             ),
           ],
         ),
