@@ -4,6 +4,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 
+class MockOnPressed extends Mock {
+  void call(BuildContext context);
+}
+
 class MockGetForegroundColor extends Mock {
   Color call(Set<MaterialState> states, Brightness brightness);
 }
@@ -526,5 +530,56 @@ void main() {
         EdgeInsets.fromLTRB(16, 8, 16, 8),
       );
     });
+  });
+
+  group('when button pressed', () {
+    MockOnPressed onPressed;
+
+    setUp(() {
+      onPressed = MockOnPressed();
+    });
+    testWidgets('onPressed should be called', (tester) async {
+      await tester.pumpWidget(
+        MaterialApp(
+          home: Scaffold(
+            body: BaseArculusButton(
+              label: 'Test Label',
+              icon: SizedBox(key: Key('icon')),
+              onPressed: onPressed,
+            ),
+          ),
+        ),
+      );
+
+      final button = find.byKey(Key('arculus-base-button'));
+
+      expect(button, findsOneWidget);
+      await tester.tap(button);
+
+      verify(onPressed(any));
+    });
+    testWidgets(
+      'onPressed should NOT be called when isLoading',
+      (tester) async {
+        await tester.pumpWidget(
+          MaterialApp(
+            home: Scaffold(
+              body: BaseArculusButton(
+                isLoading: true,
+                label: 'Test Label',
+                icon: SizedBox(key: Key('icon')),
+                onPressed: onPressed,
+              ),
+            ),
+          ),
+        );
+
+        final button = find.byKey(Key('arculus-base-button'));
+
+        tester.press(button);
+
+        verifyNever(onPressed(any));
+      },
+    );
   });
 }
