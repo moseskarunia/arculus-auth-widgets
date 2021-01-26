@@ -55,7 +55,8 @@ class BaseArculusButton extends StatelessWidget {
                     ?.style
                     ?.foregroundColor) ??
             MaterialStateProperty.resolveWith(
-                (s) => Theme.of(context).primaryTextTheme.button.color),
+              (s) => Theme.of(context).primaryTextTheme.button.color,
+            ),
         backgroundColor: (getBackgroundColor != null
                 ? MaterialStateProperty.resolveWith(
                     (s) => getBackgroundColor(s, Theme.of(context).brightness),
