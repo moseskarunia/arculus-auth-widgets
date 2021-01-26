@@ -56,35 +56,29 @@ class BaseArculusButton extends StatelessWidget {
         child: Text(
           label,
           key: Key('arculus-base-button-label'),
-          style: Theme.of(context).primaryTextTheme.button.copyWith(
-                color: Theme.of(context)
-                    .primaryTextTheme
-                    .button
-                    .color
-                    .withOpacity(isLoading ? 0.5 : 1),
-              ),
         ),
       )
     ];
 
-    if (isLoading) {
-      if (isExpanded) {
-        buttonChildren.add(Spacer());
-      } else {
-        buttonChildren.add(SizedBox(width: 16));
-      }
+    if (isExpanded) {
+      buttonChildren.add(Spacer(
+        key: Key('arculus-base-button-spacer'),
+      ));
+    }
 
-      buttonChildren.add(SizedBox(
-        key: Key('arculus-base-button-progress-indicator-sized-box'),
-        width: 18,
-        height: 18,
-        child: CircularProgressIndicator(
-          key: Key('arculus-base-button-progress-indicator'),
-          strokeWidth: 2,
+    if (isLoading) {
+      buttonChildren.add(Padding(
+        padding: const EdgeInsets.only(left: 16),
+        child: SizedBox(
+          key: Key('arculus-base-button-progress-indicator-sized-box'),
+          width: 12,
+          height: 12,
+          child: CircularProgressIndicator(
+            key: Key('arculus-base-button-progress-indicator'),
+            strokeWidth: 2,
+          ),
         ),
       ));
-    } else {
-      buttonChildren.add(Spacer());
     }
 
     return ElevatedButton(
