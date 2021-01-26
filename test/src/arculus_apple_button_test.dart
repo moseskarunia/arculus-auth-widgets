@@ -12,6 +12,7 @@ void main() {
             home: Scaffold(
               body: ArculusAppleButton(
                 label: 'Continue with Apple',
+                onPressed: (_) {},
               ),
             ),
           ));
@@ -60,6 +61,7 @@ void main() {
             home: Scaffold(
               body: ArculusAppleButton(
                 label: 'Continue with Apple',
+                onPressed: (_) {},
               ),
             ),
           ));
@@ -97,6 +99,83 @@ void main() {
           expect(button.style.foregroundColor.resolve({MaterialState.disabled}),
               Colors.black.withOpacity(0.5));
         },
+      );
+    });
+  });
+
+  testWidgets(
+    'icon should be wrapped in 18x18 sized box with 16 margin',
+    (tester) async {
+      await tester.pumpWidget(MaterialApp(
+        home: Scaffold(
+          body: ArculusAppleButton(label: 'Continue with Apple'),
+        ),
+      ));
+
+      final appleIcon = find.byKey(Key('apple-icon'));
+      final parent = find
+          .ancestor(
+            of: appleIcon,
+            matching: find.byType(Container),
+          )
+          .first;
+
+      final wrapperWidget = tester.widget<Container>(parent);
+
+      expect(wrapperWidget.margin, const EdgeInsets.all(16));
+      expect(
+        wrapperWidget.constraints,
+        BoxConstraints.tightFor(width: 18, height: 18),
+      );
+    },
+  );
+
+  group('accent color', () {
+    testWidgets('should be white if Brightness.light', (tester) async {
+      await tester.pumpWidget(MaterialApp(
+        home: Scaffold(
+          body: ArculusAppleButton(
+            label: 'Continue with Apple',
+            onPressed: (_) {},
+          ),
+        ),
+      ));
+
+      final theme = find
+          .descendant(
+            of: find.byKey(Key('arculus-apple-button')),
+            matching: find.byType(Theme),
+          )
+          .first;
+
+      expect(
+        tester.widget<Theme>(theme).data.accentColor,
+        Colors.white.withOpacity(0.5),
+      );
+    });
+    testWidgets('should be black if Brightness.dark', (tester) async {
+      await tester.pumpWidget(MaterialApp(
+        themeMode: ThemeMode.dark,
+        darkTheme: ThemeData(brightness: Brightness.dark),
+        home: Scaffold(
+          body: ArculusAppleButton(
+            label: 'Continue with Apple',
+            isLoading: true,
+            onPressed: (_) {},
+          ),
+        ),
+      ));
+
+      final theme = find
+          .descendant(
+            of: find.byKey(Key('arculus-apple-button')),
+            matching: find.byType(Theme),
+          )
+          .first;
+
+      expect(
+        tester.widget<Theme>(theme).data.accentColor,
+        Colors.black.withOpacity(0.5),
       );
     });
   });
