@@ -1,3 +1,9 @@
+## [1.0.0] - 28 January 2021
+- **Breaking**: Generic style buttons are removed.
+- New: You can set `isExpanded` property to make the button either grow or wrap children.
+- Update: ProgressIndicator no longer replaces label, but instead, placed on the right side of the label.
+- New: All widgets are now fully tested.
+
 ## [0.1.1] - 25 January 2021
 - Fix: Changed `if (buttonThemeData == null) ` to `if (buttonThemeData?.style == null)` in `ArculusEmailButton` and `GenericEmailButton` to prevent exception in case of buttonThemeData is not null, but its style is null.
 

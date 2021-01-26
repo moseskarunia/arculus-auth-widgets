@@ -29,64 +29,11 @@ Flutter's `ThemeData` has a property called `themeMode`. ThemeMode is basically 
 
 # Features
 
-## Generic Button
-<img src="https://raw.githubusercontent.com/moseskarunia/arculus-auth-widgets/master/graphics/generic_normal.png" alt="Generic Normal" height="256" width="512">
-
-Generic buttons basically just customized `ElevatedButton.icon()`.
-
-```dart
-GenericEmailButton(label: 'Sign in with Email', onPressed: (_) {});
-GenericAppleButton(label: 'Sign in with Apple', onPressed: (_) {});
-GenericGoogleButton(label: 'Sign in with Google', onPressed: (_) {});
-```
-
-<img src="https://raw.githubusercontent.com/moseskarunia/arculus-auth-widgets/master/graphics/generic_rounded.png" alt="Generic Rounded" height="256" width="512">
-
-And since they are basically a `ElevatedButton`, they will adapt to your `ElevatedButtonThemeData` in your root `ThemeData`. For example, I can modify the style of the button to be rounded with `elevatedButtonTheme`'s shape like below. (See the rounded google dark button with that nice circular white background? Yep. It's automatically applied if you make your `ElevatedButton` theme rounded 😉)
-
-```dart
-class MyApp extends StatelessWidget {
-  OutlinedBorder getBorder(Set<MaterialState> states) {
-    return RoundedRectangleBorder(
-      /// The value 100 doesn't really matter because, afaik, it will be rounded down to 50% 
-      /// of the final height of the widget. (Please correct me if I'm wrong)
-      borderRadius: BorderRadius.circular(100), 
-    );
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      /// Use ThemeMode.dark to force darkTheme or ThemeMode.system to match device's theme.
-      themeMode: ThemeMode.light
-      /// Other codes
-      theme: ThemeData(
-        brightness: Brightness.light
-        /// Other codes
-        elevatedButtonTheme: ElevatedButtonThemeData(
-            style: ButtonStyle(
-          shape: MaterialStateProperty.resolveWith(getBorder),
-        )),
-      ),
-      darkTheme: ThemeData(
-        brightness: Brightness.dark
-      /// Other codes
-        elevatedButtonTheme: ElevatedButtonThemeData(
-            style: ButtonStyle(
-          shape: MaterialStateProperty.resolveWith(getBorder),
-        )),
-      ),
-      /// Other codes
-    );
-  }
-}
-```
-
-## Arculus Style Button
+## Social Button
 
 <img src="https://raw.githubusercontent.com/moseskarunia/arculus-auth-widgets/master/graphics/arculus_normal.png" alt="Arculus Normal" height="256" width="512">
 
-Arculus-Style buttons are still `ElevatedButton` at heart, but with more adjustments to make it nicer-looking (for my taste). And yes, they will still adapt to your `ElevatedButtonThemeData` in your root `ThemeData`. (though maybe not as flexible as the generic ones)
+Arculus-Style buttons are still `ElevatedButton` at heart, but with some more adjustment. And yes, they will still adapt to your `ElevatedButtonThemeData` in your root `ThemeData`.
 
 ```dart
 ArculusEmailButton(label: 'Sign in with Email', onPressed: (_) {});
@@ -95,8 +42,6 @@ ArculusGoogleButton(label: 'Sign in with Google', onPressed: (_) {});
 ```
 
 <img src="https://raw.githubusercontent.com/moseskarunia/arculus-auth-widgets/master/graphics/arculus_rounded.png" alt="Arculus Rounded" height="256" width="512">
-
-They can also be made rounded, similar to how you make the generic ones rounded.
 
 ```dart
 class MyApp extends StatelessWidget {
