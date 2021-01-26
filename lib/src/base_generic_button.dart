@@ -39,7 +39,7 @@ class BaseGenericButton extends StatelessWidget {
     this.getBackgroundColor,
     this.getPadding,
     this.onPressed,
-  });
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -62,7 +62,7 @@ class BaseGenericButton extends StatelessWidget {
         : Theme.of(context).elevatedButtonTheme.style?.padding;
 
     return ElevatedButton.icon(
-      key: key,
+      key: Key('arculus-generic-base-button'),
       icon: child,
       label: isLoading
           ? Center(
