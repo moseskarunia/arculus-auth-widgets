@@ -7,7 +7,7 @@ import 'package:flutter/material.dart';
 ///
 /// This button will use the primary color of the closest theme it find,
 /// and will apply 0.5 opacity to each icon (only if it's the default email icon, )
-/// 
+///
 /// Other than that, it will match the color of your `ElevatedButtonThemeData`.
 ///
 /// If you need to test this widget, the default key is
