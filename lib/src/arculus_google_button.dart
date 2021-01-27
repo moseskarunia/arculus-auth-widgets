@@ -24,10 +24,15 @@ class ArculusGoogleButton extends StatelessWidget {
   /// If true, will automatically disables [onPressed].
   final bool isLoading;
 
+  /// If true, the button will fill the full available width. The icon still
+  /// placed at the left-most side. Default is true.
+  final bool isExpanded;
+
   const ArculusGoogleButton({
-    Key key,
+    Key key = const Key('arculus-google-button'),
     @required this.label,
     this.isLoading = false,
+    this.isExpanded = true,
     this.onPressed,
   }) : super(key: key);
 
@@ -61,20 +66,12 @@ class ArculusGoogleButton extends StatelessWidget {
     return baseColor;
   }
 
-  EdgeInsetsGeometry _getPadding(
-      Set<MaterialState> states, Brightness brightness) {
-    if (brightness == Brightness.dark) {
-      return EdgeInsets.fromLTRB(0, 0, 16, 0);
-    }
-    return EdgeInsets.fromLTRB(16, 16, 16, 16);
-  }
-
   @override
   Widget build(BuildContext context) {
     Widget icon = SizedBox(
       width: 18,
       height: 18,
-      child: GoogleIcon(),
+      child: GoogleIcon(isEnabled: onPressed != null && !isLoading),
     );
 
     if (Theme.of(context).brightness == Brightness.dark) {
@@ -95,6 +92,7 @@ class ArculusGoogleButton extends StatelessWidget {
       }
 
       icon = Container(
+        key: Key('google-icon-background'),
         decoration: BoxDecoration(
           borderRadius: _borderRadius,
           color: Colors.white
@@ -107,23 +105,28 @@ class ArculusGoogleButton extends StatelessWidget {
             height: 18,
             child: GoogleIcon(isEnabled: onPressed != null && !isLoading)),
       );
+    } else {
+      icon = Padding(
+        padding: const EdgeInsets.all(16),
+        child: icon,
+      );
     }
 
     return Theme(
       data: Theme.of(context).copyWith(
         accentColor: Theme.of(context).brightness == Brightness.light
-            ? Color(0xFF4285F4)
+            ? Color(0xFF4285F4).withOpacity(0.5)
             : Theme.of(context).primaryTextTheme.button.color.withOpacity(0.5),
       ),
       child: BaseArculusButton(
-        key: Key('arculus-google-button'),
+        isExpanded: isExpanded,
         isLoading: isLoading,
-        child: icon,
+        icon: icon,
         label: label,
         onPressed: onPressed,
         getForegroundColor: _getForegroundColor,
         getBackgroundColor: _getBackgroundColor,
-        getPadding: _getPadding,
+        getPadding: (s, _) => EdgeInsets.fromLTRB(0, 0, 16, 0),
       ),
     );
   }
