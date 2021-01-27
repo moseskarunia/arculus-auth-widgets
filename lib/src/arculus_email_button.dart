@@ -1,12 +1,12 @@
 import 'package:arculus_auth_widgets/src/base_arculus_button.dart';
 import 'package:flutter/material.dart';
 
-/// Email Sign In Button in Arculus Style which I think is neater.
-/// If you need the more generic version, see [GenericEmailButton].
+/// Email Sign In Button.
 ///
 /// You can easily theme it using the ordinary theming of a flutter app.
 ///
-/// If you need to test this widget, the key is `Key('arculus-email-button')`.
+/// If you need to test this widget, the default key is
+/// `Key('arculus-email-button')`.
 ///
 /// See readme for more info.
 class ArculusEmailButton extends StatelessWidget {
@@ -25,11 +25,16 @@ class ArculusEmailButton extends StatelessWidget {
   /// If true, will automatically disables [onPressed].
   final bool isLoading;
 
+  /// If true, the button will fill the full available width. The icon still
+  /// placed at the left-most side. Default is true.
+  final bool isExpanded;
+
   const ArculusEmailButton({
-    Key key,
+    Key key = const Key('arculus-email-button'),
     @required this.label,
     this.isLoading = false,
     this.icon = Icons.email,
+    this.isExpanded = true,
     this.onPressed,
   }) : super(key: key);
 
@@ -90,10 +95,10 @@ class ArculusEmailButton extends StatelessWidget {
             Theme.of(context).primaryTextTheme.button.color.withOpacity(0.5),
       ),
       child: BaseArculusButton(
-        key: Key('arculus-email-button'),
+        isExpanded: isExpanded,
         isLoading: isLoading,
-        child: Padding(
-          padding: const EdgeInsets.only(right: 16),
+        icon: Padding(
+          padding: const EdgeInsets.all(16),
           child: Icon(
             Icons.email,
             size: 18,
@@ -106,7 +111,7 @@ class ArculusEmailButton extends StatelessWidget {
         ),
         label: label,
         onPressed: onPressed,
-        getPadding: (s, _) => EdgeInsets.all(16),
+        getPadding: (s, _) => EdgeInsets.fromLTRB(0, 0, 16, 0),
       ),
     );
   }

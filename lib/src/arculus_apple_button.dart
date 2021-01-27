@@ -2,12 +2,12 @@ import 'package:arculus_auth_widgets/src/apple_icon.dart';
 import 'package:arculus_auth_widgets/src/base_arculus_button.dart';
 import 'package:flutter/material.dart';
 
-/// Apple Sign In Button in Arculus Style which I think is neater.
-/// If you need the more generic version, see [GenericAppleButton].
+/// Apple Sign In Button.
 ///
 /// You can easily theme it using the ordinary theming of a flutter app.
 ///
-/// If you need to test this widget, the key is `Key('arculus-apple-button')`.
+/// If you need to test this widget, the default key is
+/// `Key('arculus-apple-button')`.
 ///
 /// See readme for more info.
 class ArculusAppleButton extends StatelessWidget {

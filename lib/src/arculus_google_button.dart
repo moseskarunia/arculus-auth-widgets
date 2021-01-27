@@ -2,12 +2,12 @@ import 'package:arculus_auth_widgets/src/base_arculus_button.dart';
 import 'package:arculus_auth_widgets/src/google_icon.dart';
 import 'package:flutter/material.dart';
 
-/// Google Sign In Button in Arculus Style which I think is neater.
-/// If you need the more generic version, see [GenericGoogleButton].
+/// Google Sign In Button
 ///
 /// You can easily theme it using the ordinary theming of a flutter app.
 ///
-/// If you need to test this widget, the key is `Key('arculus-google-button')`.
+/// If you need to test this widget, the default key is
+/// `Key('arculus-google-button')`.
 ///
 /// See readme for more info.
 class ArculusGoogleButton extends StatelessWidget {
