@@ -25,20 +25,19 @@ jobs:
         run: flutter format --set-exit-if-changed lib example
       - name: Analyze project source
         run: flutter analyze lib example
-      # Coming soon:
-      # - name: Format
-      #   run: flutter format --set-exit-if-changed lib test example
-      # - name: Analyze project source
-      #   run: flutter analyze lib test
-      # - name: Test
-      #   run: flutter test --coverage
-      # - name: Check Code Coverage
-      #   uses: ChicagoFlutter/lcov-cop@v1.0.0
-      #   with:
-      #     path: coverage/lcov.info
-      # - name: Upload coverage to Codecov
-      #   uses: codecov/codecov-action@v1
-      #   with:
-      #     token: ${{ secrets.CODECOV_TOKEN }}
+      - name: Format
+        run: flutter format --set-exit-if-changed lib test example
+      - name: Analyze project source
+        run: flutter analyze lib test
+      - name: Test
+        run: flutter test --coverage
+      - name: Check Code Coverage
+        uses: ChicagoFlutter/lcov-cop@v1.0.0
+        with:
+          path: coverage/lcov.info
+      - name: Upload coverage to Codecov
+        uses: codecov/codecov-action@v1
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
       - name: Dry Run Publish to Pub Dev
         run: pub publish --dry-run
