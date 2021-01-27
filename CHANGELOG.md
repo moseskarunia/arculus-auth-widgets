@@ -1,5 +1,6 @@
 ## [1.0.0] - 28 January 2021
 - **Breaking**: Generic style buttons are removed.
+- **Breaking**: ArculusEmailButton is renamed into ArculusPrimaryButton. Now you can use any widget to override the icon.
 - New: You can set `isExpanded` property to make the button either grow or wrap children.
 - Update: ProgressIndicator no longer replaces label, but instead, placed on the right side of the label.
 - New: All widgets are now fully tested.

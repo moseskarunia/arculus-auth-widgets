@@ -61,7 +61,7 @@ class _MyHomePageState extends State<MyHomePage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            ArculusEmailButton(
+            ArculusPrimaryButton(
               label: 'Sign in with Email',
               onPressed: (_) {},
               isLoading: false,

@@ -1,15 +1,20 @@
 import 'package:arculus_auth_widgets/src/base_arculus_button.dart';
 import 'package:flutter/material.dart';
 
-/// Email Sign In Button.
+/// Primary Sign In button with default icon using email icon with 18 size and
+/// color equals to your primaryTextTheme button's color. To override,
+/// provide a widget to [icon] property. Make sure that the icon has size 18.
 ///
-/// You can easily theme it using the ordinary theming of a flutter app.
+/// This button will use the primary color of the closest theme it find,
+/// and will apply 0.5 opacity to each icon (only if it's the default email icon, )
+/// 
+/// Other than that, it will match the color of your `ElevatedButtonThemeData`.
 ///
 /// If you need to test this widget, the default key is
-/// `Key('arculus-email-button')`.
+/// `Key('arculus-primary-button')`.
 ///
 /// See readme for more info.
-class ArculusEmailButton extends StatelessWidget {
+class ArculusPrimaryButton extends StatelessWidget {
   /// Text to display on the button.
   final String label;
 
@@ -29,8 +34,8 @@ class ArculusEmailButton extends StatelessWidget {
   /// placed at the left-most side. Default is true.
   final bool isExpanded;
 
-  const ArculusEmailButton({
-    Key key = const Key('arculus-email-button'),
+  const ArculusPrimaryButton({
+    Key key = const Key('arculus-primary-button'),
     @required this.label,
     this.isLoading = false,
     this.icon,

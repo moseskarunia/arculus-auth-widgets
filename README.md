@@ -1,7 +1,5 @@
 # Arculus Auth Widgets
 
-⚠️ This package is still under development and not yet tested. That's why it's not 1.0.0 yet. With that being said, I don't expect any major changes to the existing widgets.
-
 ![arculus-auth-widgets](https://github.com/moseskarunia/arculus-auth-widgets/workflows/arculus-auth-widgets/badge.svg) [![pub package](https://img.shields.io/pub/v/arculus_auth_widgets.svg)](https://pub.dev/packages/arculus_auth_widgets)
 
 Collection of flutter auth-related widgets such as social sign in buttons, splash page, and sign in page, etc. These widgets are designed to work nicely with your app theming as well as respective brand guidelines. Feel free to post an issue if there's anything wrong.
@@ -36,10 +34,12 @@ Flutter's `ThemeData` has a property called `themeMode`. ThemeMode is basically 
 Arculus-Style buttons are still `ElevatedButton` at heart, but with some more adjustment. And yes, they will still adapt to your `ElevatedButtonThemeData` in your root `ThemeData`.
 
 ```dart
-ArculusEmailButton(label: 'Sign in with Email', onPressed: (_) {});
+ArculusPrimaryButton(label: 'Sign in with Email', onPressed: (_) {});
 ArculusAppleButton(label: 'Sign in with Apple', onPressed: (_) {});
 ArculusGoogleButton(label: 'Sign in with Google', onPressed: (_) {});
 ```
+
+`Arculus Primary Button` will use email icon by default, but you can override it using any Widget. Make sure that the widget has size 18.
 
 <img src="https://raw.githubusercontent.com/moseskarunia/arculus-auth-widgets/master/graphics/arculus_rounded.png" alt="Arculus Rounded" height="256" width="512">
 
@@ -97,17 +97,17 @@ In case you need the button to diverge from the root `themeMode`, you can wrap y
 ```dart
 Theme(
   data: Theme.of(context).copyWith(brightness: Brightness.dark),
-  child: GenericGoogleButton(label: 'Sign in with Google', onPressed: (_) {})
+  child: ArculusGoogleButton(label: 'Sign in with Google', onPressed: (_) {})
 ),
 ```
 
 You can use this method to override anything else as well. For example, in case you want to use regular shaped `ElevatedButton` globally, but want to use the rounded version of `ArculusGoogleButton`.
 
 # Coming Soon
-- Write widget testing with codecov.
 - Other social buttons (Request in Issue!)
 - Predefined splash page
 - Predefined onboarding page
+- Predefined email sign in page
 
 # Support
 

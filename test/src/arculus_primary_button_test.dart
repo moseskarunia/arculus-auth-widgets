@@ -11,7 +11,7 @@ void main() {
         await tester.pumpWidget(MaterialApp(
           theme: ThemeData(primaryColor: Colors.orange),
           home: Scaffold(
-            body: ArculusEmailButton(
+            body: ArculusPrimaryButton(
               label: 'Continue with Email',
               onPressed: (_) {},
             ),
@@ -20,7 +20,7 @@ void main() {
 
         final themeFinder = find
             .descendant(
-              of: find.byKey(Key('arculus-email-button')),
+              of: find.byKey(Key('arculus-primary-button')),
               matching: find.byType(Theme),
             )
             .first;
@@ -47,7 +47,7 @@ void main() {
             ),
           ),
           home: Scaffold(
-            body: ArculusEmailButton(
+            body: ArculusPrimaryButton(
               label: 'Continue with Email',
               onPressed: (_) {},
             ),
@@ -56,7 +56,7 @@ void main() {
 
         final themeFinder = find
             .descendant(
-              of: find.byKey(Key('arculus-email-button')),
+              of: find.byKey(Key('arculus-primary-button')),
               matching: find.byType(Theme),
             )
             .first;
@@ -76,7 +76,7 @@ void main() {
         await tester.pumpWidget(MaterialApp(
           theme: ThemeData(primaryColor: Colors.red),
           home: Scaffold(
-            body: ArculusEmailButton(
+            body: ArculusPrimaryButton(
               label: 'Continue with Email',
               onPressed: (_) {},
             ),
@@ -85,7 +85,7 @@ void main() {
 
         final themeFinder = find
             .descendant(
-              of: find.byKey(Key('arculus-email-button')),
+              of: find.byKey(Key('arculus-primary-button')),
               matching: find.byType(Theme),
             )
             .first;
@@ -106,7 +106,7 @@ void main() {
       await tester.pumpWidget(MaterialApp(
         theme: ThemeData(primaryColor: Colors.red),
         home: Scaffold(
-          body: ArculusEmailButton(
+          body: ArculusPrimaryButton(
             label: 'Continue with Email',
             onPressed: (_) {},
             isLoading: true,
@@ -116,7 +116,7 @@ void main() {
 
       final themeFinder = find
           .descendant(
-            of: find.byKey(Key('arculus-email-button')),
+            of: find.byKey(Key('arculus-primary-button')),
             matching: find.byType(Theme),
           )
           .first;
@@ -134,7 +134,7 @@ void main() {
       await tester.pumpWidget(MaterialApp(
         theme: ThemeData(primaryColor: Colors.red),
         home: Scaffold(
-          body: ArculusEmailButton(
+          body: ArculusPrimaryButton(
             label: 'Continue with Email',
             onPressed: (_) {},
             isLoading: false,
@@ -143,7 +143,7 @@ void main() {
       ));
       final themeFinder = find
           .descendant(
-            of: find.byKey(Key('arculus-email-button')),
+            of: find.byKey(Key('arculus-primary-button')),
             matching: find.byType(Theme),
           )
           .first;
@@ -164,7 +164,7 @@ void main() {
         await tester.pumpWidget(MaterialApp(
           theme: ThemeData(primaryColor: Colors.red),
           home: Scaffold(
-            body: ArculusEmailButton(
+            body: ArculusPrimaryButton(
               label: 'Continue with Email',
               onPressed: (_) {},
               isLoading: true,
@@ -173,7 +173,7 @@ void main() {
         ));
         final themeFinder = find
             .descendant(
-              of: find.byKey(Key('arculus-email-button')),
+              of: find.byKey(Key('arculus-primary-button')),
               matching: find.byType(Theme),
             )
             .first;
@@ -193,7 +193,7 @@ void main() {
       await tester.pumpWidget(MaterialApp(
         theme: ThemeData(primaryColor: Colors.red),
         home: Scaffold(
-          body: ArculusEmailButton(
+          body: ArculusPrimaryButton(
             label: 'Continue with Email',
             onPressed: (_) {},
             isLoading: false,
