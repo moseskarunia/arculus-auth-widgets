@@ -2,12 +2,12 @@ import 'package:arculus_auth_widgets/src/apple_icon.dart';
 import 'package:arculus_auth_widgets/src/base_arculus_button.dart';
 import 'package:flutter/material.dart';
 
-/// Apple Sign In Button in Arculus Style which I think is neater.
-/// If you need the more generic version, see [GenericAppleButton].
+/// Apple Sign In Button.
 ///
 /// You can easily theme it using the ordinary theming of a flutter app.
 ///
-/// If you need to test this widget, the key is `Key('arculus-apple-button')`.
+/// If you need to test this widget, the default key is
+/// `Key('arculus-apple-button')`.
 ///
 /// See readme for more info.
 class ArculusAppleButton extends StatelessWidget {
@@ -24,10 +24,15 @@ class ArculusAppleButton extends StatelessWidget {
   /// If true, will automatically disables [onPressed].
   final bool isLoading;
 
+  /// If true, the button will fill the full available width. The icon still
+  /// placed at the left-most side. Default is true.
+  final bool isExpanded;
+
   const ArculusAppleButton({
-    Key key,
+    Key key = const Key('arculus-apple-button'),
     @required this.label,
     this.isLoading = false,
+    this.isExpanded = true,
     this.onPressed,
   }) : super(key: key);
 
@@ -61,13 +66,6 @@ class ArculusAppleButton extends StatelessWidget {
     return baseColor;
   }
 
-  EdgeInsetsGeometry _getPadding(
-    Set<MaterialState> states,
-    Brightness brightness,
-  ) {
-    return EdgeInsets.fromLTRB(16, 16, 16, 16);
-  }
-
   @override
   Widget build(BuildContext context) {
     return Theme(
@@ -77,21 +75,21 @@ class ArculusAppleButton extends StatelessWidget {
             : Colors.black.withOpacity(0.5),
       ),
       child: BaseArculusButton(
-        key: Key('arculus-apple-button'),
+        isExpanded: isExpanded,
         isLoading: isLoading,
-        child: Container(
-          margin: const EdgeInsets.only(right: 16),
+        icon: Container(
+          width: 18,
+          height: 18,
+          margin: const EdgeInsets.all(16),
           child: AppleIcon(
             isEnabled: onPressed != null && !isLoading,
           ),
-          width: 18,
-          height: 18,
         ),
         label: label,
         onPressed: onPressed,
         getForegroundColor: _getForegroundColor,
         getBackgroundColor: _getBackgroundColor,
-        getPadding: _getPadding,
+        getPadding: (s, _) => EdgeInsets.fromLTRB(0, 0, 16, 0),
       ),
     );
   }

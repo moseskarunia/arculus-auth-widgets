@@ -25,7 +25,10 @@ import 'package:flutter/material.dart';
 class AppleIcon extends StatelessWidget {
   final bool isEnabled;
 
-  const AppleIcon({Key key, this.isEnabled = true}) : super(key: key);
+  const AppleIcon({
+    Key key = const Key('apple-icon'),
+    this.isEnabled = true,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

@@ -18,7 +18,7 @@ class BaseArculusButton extends StatelessWidget {
   final String label;
 
   /// Recommended size is an icon with size 18
-  final Widget child;
+  final Widget icon;
 
   /// If null, the button will look "disabled". The visual also depends on
   /// [getBackgroundColor], [getBackgroundColor], and [getPadding].
@@ -30,21 +30,59 @@ class BaseArculusButton extends StatelessWidget {
   /// If true, will automatically disables [onPressed].
   final bool isLoading;
 
+  /// If true, the button will fill the full available width. The icon still
+  /// placed at the left-most side. Default is true.
+  final bool isExpanded;
+
   const BaseArculusButton({
     Key key,
     @required this.label,
-    @required this.child,
+    @required this.icon,
     this.onPressed,
     this.getForegroundColor,
     this.getBackgroundColor,
     this.getPadding,
     this.isLoading = false,
-  });
+    this.isExpanded = true,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    List<Widget> buttonChildren = [
+      icon,
+      Padding(
+        key: Key('arculus-base-button-label-padding'),
+        padding: const EdgeInsets.only(left: 16),
+        child: Text(
+          label,
+          key: Key('arculus-base-button-label'),
+        ),
+      )
+    ];
+
+    if (isExpanded) {
+      buttonChildren.add(Spacer(
+        key: Key('arculus-base-button-spacer'),
+      ));
+    }
+
+    if (isLoading) {
+      buttonChildren.add(Padding(
+        padding: const EdgeInsets.only(left: 16),
+        child: SizedBox(
+          key: Key('arculus-base-button-progress-indicator-sized-box'),
+          width: 12,
+          height: 12,
+          child: CircularProgressIndicator(
+            key: Key('arculus-base-button-progress-indicator'),
+            strokeWidth: 2,
+          ),
+        ),
+      ));
+    }
+
     return ElevatedButton(
-      key: key,
+      key: Key('arculus-base-button'),
       style: ButtonStyle(
         foregroundColor: (getForegroundColor != null
                 ? MaterialStateProperty.resolveWith(
@@ -52,10 +90,11 @@ class BaseArculusButton extends StatelessWidget {
                   )
                 : Theme.of(context)
                     .elevatedButtonTheme
-                    .style
-                    .foregroundColor) ??
+                    ?.style
+                    ?.foregroundColor) ??
             MaterialStateProperty.resolveWith(
-                (s) => Theme.of(context).primaryTextTheme.button.color),
+              (s) => Theme.of(context).primaryTextTheme.button.color,
+            ),
         backgroundColor: (getBackgroundColor != null
                 ? MaterialStateProperty.resolveWith(
                     (s) => getBackgroundColor(s, Theme.of(context).brightness),
@@ -74,20 +113,11 @@ class BaseArculusButton extends StatelessWidget {
             MaterialStateProperty.resolveWith(
                 (s) => Theme.of(context).buttonTheme.padding),
       ),
-      child: Row(children: [
-        child,
-        isLoading
-            ? Expanded(
-                child: Center(
-                  child: SizedBox(
-                    width: 18,
-                    height: 18,
-                    child: CircularProgressIndicator(strokeWidth: 2),
-                  ),
-                ),
-              )
-            : Padding(padding: EdgeInsets.only(left: 16), child: Text(label))
-      ]),
+      child: Row(
+        key: Key('arculus-base-button-main-child'),
+        mainAxisSize: isExpanded ? MainAxisSize.max : MainAxisSize.min,
+        children: buttonChildren,
+      ),
       onPressed:
           onPressed != null && !isLoading ? () => onPressed(context) : null,
     );

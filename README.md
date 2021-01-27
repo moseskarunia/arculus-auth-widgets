@@ -1,8 +1,6 @@
 # Arculus Auth Widgets
 
-⚠️ This package is still under development and not yet tested. That's why it's not 1.0.0 yet. With that being said, I don't expect any major changes to the existing widgets.
-
-![arculus-auth-widgets](https://github.com/moseskarunia/arculus-auth-widgets/workflows/arculus-auth-widgets/badge.svg) [![pub package](https://img.shields.io/pub/v/arculus_auth_widgets.svg)](https://pub.dev/packages/arculus_auth_widgets)
+![arculus-auth-widgets](https://github.com/moseskarunia/arculus-auth-widgets/workflows/arculus-auth-widgets/badge.svg) [![codecov](https://codecov.io/gh/moseskarunia/arculus-auth-widgets/branch/master/graph/badge.svg?token=OTWJQBNHOC)](https://codecov.io/gh/moseskarunia/arculus-auth-widgets) [![pub package](https://img.shields.io/pub/v/arculus_auth_widgets.svg)](https://pub.dev/packages/arculus_auth_widgets)
 
 Collection of flutter auth-related widgets such as social sign in buttons, splash page, and sign in page, etc. These widgets are designed to work nicely with your app theming as well as respective brand guidelines. Feel free to post an issue if there's anything wrong.
 
@@ -29,74 +27,21 @@ Flutter's `ThemeData` has a property called `themeMode`. ThemeMode is basically 
 
 # Features
 
-## Generic Button
-<img src="https://raw.githubusercontent.com/moseskarunia/arculus-auth-widgets/master/graphics/generic_normal.png" alt="Generic Normal" height="256" width="512">
-
-Generic buttons basically just customized `ElevatedButton.icon()`.
-
-```dart
-GenericEmailButton(label: 'Sign in with Email', onPressed: (_) {});
-GenericAppleButton(label: 'Sign in with Apple', onPressed: (_) {});
-GenericGoogleButton(label: 'Sign in with Google', onPressed: (_) {});
-```
-
-<img src="https://raw.githubusercontent.com/moseskarunia/arculus-auth-widgets/master/graphics/generic_rounded.png" alt="Generic Rounded" height="256" width="512">
-
-And since they are basically a `ElevatedButton`, they will adapt to your `ElevatedButtonThemeData` in your root `ThemeData`. For example, I can modify the style of the button to be rounded with `elevatedButtonTheme`'s shape like below. (See the rounded google dark button with that nice circular white background? Yep. It's automatically applied if you make your `ElevatedButton` theme rounded 😉)
-
-```dart
-class MyApp extends StatelessWidget {
-  OutlinedBorder getBorder(Set<MaterialState> states) {
-    return RoundedRectangleBorder(
-      /// The value 100 doesn't really matter because, afaik, it will be rounded down to 50% 
-      /// of the final height of the widget. (Please correct me if I'm wrong)
-      borderRadius: BorderRadius.circular(100), 
-    );
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      /// Use ThemeMode.dark to force darkTheme or ThemeMode.system to match device's theme.
-      themeMode: ThemeMode.light
-      /// Other codes
-      theme: ThemeData(
-        brightness: Brightness.light
-        /// Other codes
-        elevatedButtonTheme: ElevatedButtonThemeData(
-            style: ButtonStyle(
-          shape: MaterialStateProperty.resolveWith(getBorder),
-        )),
-      ),
-      darkTheme: ThemeData(
-        brightness: Brightness.dark
-      /// Other codes
-        elevatedButtonTheme: ElevatedButtonThemeData(
-            style: ButtonStyle(
-          shape: MaterialStateProperty.resolveWith(getBorder),
-        )),
-      ),
-      /// Other codes
-    );
-  }
-}
-```
-
-## Arculus Style Button
+## Social Button
 
 <img src="https://raw.githubusercontent.com/moseskarunia/arculus-auth-widgets/master/graphics/arculus_normal.png" alt="Arculus Normal" height="256" width="512">
 
-Arculus-Style buttons are still `ElevatedButton` at heart, but with more adjustments to make it nicer-looking (for my taste). And yes, they will still adapt to your `ElevatedButtonThemeData` in your root `ThemeData`. (though maybe not as flexible as the generic ones)
+Arculus-Style buttons are still `ElevatedButton` at heart, but with some more adjustment. And yes, they will still adapt to your `ElevatedButtonThemeData` in your root `ThemeData`.
 
 ```dart
-ArculusEmailButton(label: 'Sign in with Email', onPressed: (_) {});
+ArculusPrimaryButton(label: 'Sign in with Email', onPressed: (_) {});
 ArculusAppleButton(label: 'Sign in with Apple', onPressed: (_) {});
 ArculusGoogleButton(label: 'Sign in with Google', onPressed: (_) {});
 ```
 
-<img src="https://raw.githubusercontent.com/moseskarunia/arculus-auth-widgets/master/graphics/arculus_rounded.png" alt="Arculus Rounded" height="256" width="512">
+`Arculus Primary Button` will use email icon by default, but you can override it using any Widget. Make sure that the widget has size 18.
 
-They can also be made rounded, similar to how you make the generic ones rounded.
+<img src="https://raw.githubusercontent.com/moseskarunia/arculus-auth-widgets/master/graphics/arculus_rounded.png" alt="Arculus Rounded" height="256" width="512">
 
 ```dart
 class MyApp extends StatelessWidget {
@@ -152,17 +97,17 @@ In case you need the button to diverge from the root `themeMode`, you can wrap y
 ```dart
 Theme(
   data: Theme.of(context).copyWith(brightness: Brightness.dark),
-  child: GenericGoogleButton(label: 'Sign in with Google', onPressed: (_) {})
+  child: ArculusGoogleButton(label: 'Sign in with Google', onPressed: (_) {})
 ),
 ```
 
 You can use this method to override anything else as well. For example, in case you want to use regular shaped `ElevatedButton` globally, but want to use the rounded version of `ArculusGoogleButton`.
 
 # Coming Soon
-- Write widget testing with codecov.
 - Other social buttons (Request in Issue!)
 - Predefined splash page
 - Predefined onboarding page
+- Predefined email sign in page
 
 # Support
 
