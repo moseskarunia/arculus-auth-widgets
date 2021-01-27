@@ -13,8 +13,8 @@ class ArculusEmailButton extends StatelessWidget {
   /// Text to display on the button.
   final String label;
 
-  /// Email icon. Defaults to [Icons.email]
-  final IconData icon;
+  /// Email icon. Defaults to [Icons.email] with size 18
+  final Widget icon;
 
   /// If null, the button will be displayed like a "disabled" button.
   final void Function(BuildContext) onPressed;
@@ -33,7 +33,7 @@ class ArculusEmailButton extends StatelessWidget {
     Key key = const Key('arculus-email-button'),
     @required this.label,
     this.isLoading = false,
-    this.icon = Icons.email,
+    this.icon,
     this.isExpanded = true,
     this.onPressed,
   }) : super(key: key);
@@ -41,7 +41,6 @@ class ArculusEmailButton extends StatelessWidget {
   Color _getBackgroundColor(
     Color primaryColor,
     Set<MaterialState> states,
-    Brightness brightness,
   ) {
     const Set<MaterialState> interactiveStates = <MaterialState>{
       MaterialState.disabled
@@ -54,38 +53,25 @@ class ArculusEmailButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final current =
-        Theme.of(context).elevatedButtonTheme?.style?.backgroundColor;
-
     ElevatedButtonThemeData buttonThemeData =
         Theme.of(context).elevatedButtonTheme;
 
-    if (current == null) {
-      if (buttonThemeData?.style == null) {
-        buttonThemeData = ElevatedButtonThemeData(
-          style: ButtonStyle(
-            backgroundColor: MaterialStateProperty.resolveWith(
-              (s) => _getBackgroundColor(
-                Theme.of(context).primaryColor,
-                s,
-                Theme.of(context).brightness,
-              ),
-            ),
+    if (buttonThemeData?.style == null) {
+      buttonThemeData = ElevatedButtonThemeData(
+        style: ButtonStyle(
+          backgroundColor: MaterialStateProperty.resolveWith(
+            (s) => _getBackgroundColor(Theme.of(context).primaryColor, s),
           ),
-        );
-      } else {
-        buttonThemeData = ElevatedButtonThemeData(
-          style: buttonThemeData.style.copyWith(
-            backgroundColor: MaterialStateProperty.resolveWith(
-              (s) => _getBackgroundColor(
-                Theme.of(context).primaryColor,
-                s,
-                Theme.of(context).brightness,
-              ),
-            ),
+        ),
+      );
+    } else {
+      buttonThemeData = ElevatedButtonThemeData(
+        style: buttonThemeData.style.copyWith(
+          backgroundColor: MaterialStateProperty.resolveWith(
+            (s) => _getBackgroundColor(Theme.of(context).primaryColor, s),
           ),
-        );
-      }
+        ),
+      );
     }
 
     return Theme(
@@ -99,15 +85,17 @@ class ArculusEmailButton extends StatelessWidget {
         isLoading: isLoading,
         icon: Padding(
           padding: const EdgeInsets.all(16),
-          child: Icon(
-            Icons.email,
-            size: 18,
-            color: Theme.of(context)
-                .primaryTextTheme
-                .button
-                .color
-                .withOpacity(onPressed != null && !isLoading ? 1 : 0.5),
-          ),
+          child: icon ??
+              Icon(
+                Icons.email,
+                key: Key('arculus-primary-button-default-icon'),
+                size: 18,
+                color: Theme.of(context)
+                    .primaryTextTheme
+                    .button
+                    .color
+                    .withOpacity(onPressed != null && !isLoading ? 1 : 0.5),
+              ),
         ),
         label: label,
         onPressed: onPressed,
